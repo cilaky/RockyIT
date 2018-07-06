@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />
+</head>
+<body>    
+        <h1>VIGNETTE</h1>
+
+        <div id="login">
+                <form method="post">
+                    <fieldset>
+                        <legend class="controle">Login</legend>
+                
+                        <table>
+                            <tr>
+                                <td>Numéro du dossier</td>
+                                <td><input type="text" name="pers_id" class="txtStyle" /></td>
+                            </tr>
+                            <tr>
+                                <td>ID Point de Vente</td>
+                                <td><input type="text" name="pointvente" class="txtStyle" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" value="Se connecter" class="bouton" /></td>
+                            </tr>
+                    
+                        </table>
+                    </fieldset>
+                </form>
+
+        
+                @if (IsPost)
+                {
+                    Session["entity"] = Request["pointvente"];
+                    Session["utilisateur"] = Request["pers_id"];
+                    Session["user_group"] = "Vignettes";
+                    Response.Redirect("/Vignette/Index");
+                }
+
+        <!--<a href="/Vignette/Index">Vignette</a>-->
+    </div>
+</body>
+</html>

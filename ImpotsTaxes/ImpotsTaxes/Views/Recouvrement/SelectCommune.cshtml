@@ -1,0 +1,42 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectCommune</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="" onload="processus('SelectCommune','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+    <div style="position:absolute; top:60px; left:800px; width:800px; z-index:1;">
+        <table >
+			    <tr>
+                    <th>N°</th>
+                    <th>COMMUNE</th>
+                </tr>
+                    @{ListesMED lst = new ListesMED();}
+                    @foreach (Adresse com in lst.ListCommune(Request.Params["vil"]))
+                    {
+                        <tr>
+                            <td>@com.nbre</td>
+                            <td><a href="/Recouvrement/SelectQuartier?action=@Request.Params["action"]&prov=@Request.Params["prov"]&vil=@Request.Params["vil"]&com=@com.commune">@com.commune </a></td>
+                        </tr>
+                    }
+        </table>
+    </div>
+        
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px; z-index:2;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+</body>
+</html>

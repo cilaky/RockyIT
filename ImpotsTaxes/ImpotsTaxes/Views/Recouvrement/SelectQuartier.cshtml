@@ -1,0 +1,48 @@
+﻿@using ImpotsTaxes.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectQuartier</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SelectQuartier" onload="processus('SelectQuartier','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+     <div style="position:absolute; top:60px; left:800px; width:800px; z-index:1;">
+        <table >
+			            <tr>
+                            <th>N°</th>
+                            <th>QUARTIER</th>
+                   
+                        </tr>
+                            @{ListesMED lst = new ListesMED();}
+                            @foreach (Entite entite in lst.ListQuartier(Request.Params["com"]))
+                            {
+                                <tr>
+                                    <td>@entite.nbre</td>
+                                    <td><a href="/Recouvrement/SelectAvenue?action=@Request.Params["action"]&prov=@Request.Params["prov"]&com=@Request.Params["com"]&vil=@Request.Params["vil"]&quart=@entite.quarter_sect&av=">@entite.quarter_sect</a></td>
+                          
+                                </tr>
+                            }								
+	    </table>
+    </div>
+        
+
+    <div id="processus">
+        
+    </div>
+        
+    
+</body>
+</html>

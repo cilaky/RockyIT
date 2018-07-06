@@ -1,0 +1,251 @@
+﻿@using ImpotsTaxes.Models;
+@*@{
+    ViewBag.Title = "MED";
+    
+    if(null != TempData["alertMessage"])
+   {
+      <script type="text/javascript">
+          alert("@TempData["alertMessage"]");
+
+     
+      </script>
+   }
+}*@
+
+@try
+{
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="utf-8" />
+                <!--<link rel="stylesheet" type="text/css" href="../../Content/styleMED.css" />-->
+                <title>Mise en demeure</title>
+
+                <style type="text/css">
+                    boby {
+                        width:670px;
+                        margin:auto;
+                    }
+
+                    .datafield {
+                        font-style:italic;
+                        font-weight:bold;
+                        text-decoration:dashed;
+                    }
+                </style>
+            </head>
+
+            <body style="width:670px; margin:auto;">
+
+                @{
+                    ListesMED lst = new ListesMED();
+                    Recovery rec = new Recovery();
+                    rec = lst.ElementMED(Request.Params["numMED"]);
+                    
+                    double PrincFC = 0;
+                    double PrincUSD = 0;
+                    double PenProvFC = 0;
+                    double PenProvUSD = 0;
+                    double PenDGRNKFC = 0;
+                    double PenDGRNKUSD = 0;
+                    double TotProvFC = 0;
+                    double TotProvUSD = 0;
+                    double TotDGRNKFC = 0;
+                    double TotDGRNKUSD = 0;
+                  }
+                
+                <h1 style="text-align:center;"> <strong><span style="text-decoration:underline"> REPUBLIQUE DEMOCRATIQUE DU CONGO </span> </strong></h1>
+
+                 <table>
+                <tr>
+                    <td style="width:300px;"><img src="../../Content/enteteDGRNK.jpg" alt="logo" /></td>
+                    <td>@rec.place, le @rec.letter_date</td>
+                </tr>                
+                <tr>
+                    <td>@*<span class="datafield">@ViewBag.entity_name</span>*@</td>
+                    <td>No: <span class="datafield">@rec.letter_number</span></td>
+                </tr> 
+                <tr> 
+                    <td></td> 
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><span style="text-decoration:underline;">Objet</span> : Mise en demeure</td>
+                    <td>
+                        A: <span class="datafield"> @rec.taxpayer</span><br />
+                        N°DF: <span class="datafield"> @rec.taxpayer_id</span><br />
+                        N°: <span class="datafield"> @rec.number</span> Avenue: <span class="datafield"> @rec.avenue_loc</span><br />
+                        Quartier: <span class="datafield"> @rec.quarter_sect</span><br />
+                        Commune: <span class="datafield"> @rec.commune</span><br />
+                        Tel: <span class="datafield"> @rec.telephone</span><br />
+                        A <span class="datafield" style="text-decoration:underline"> @rec.town_dist</span>
+                    </td>
+                </tr>                
+                </table>
+                
+    
+                  <!--    TEXTES DE LA LETTRE      -->  
+      
+                   
+                  <p style="text-indent:300px">Monsieur, Madame, Messieurs,</p>
+
+                  <p style="text-indent:300px">Sauf erreur, omission ou paiement intervenu    
+                  entretemps, nous avons le regret de constater que vous disposez d'une (des) note(s) de perception en souffrance en nos livres, en dépit du délai légal vous imparti
+                  pour l'(les) honorer :</p>
+                  <p style="text-indent:300px">Par conséquent, conformément aux dispositions 
+                  de l'article 176 de l'Edit N° 001/2018 Du 27 janvier 2018 fixant les règles de perception des 
+                  impôt,droits, taxes et redevances de la Province du Nord-Kivu et de ses Entités Territoriales 
+                  Décentralisées, votre situation fiscale à ce jour se présente de la manière suivante: </p>
+            
+                   <table style="border-collapse:collapse; margin:auto;">
+                <tr>                    
+                    <th rowspan="3" style="border:1px solid black;">Note</th>
+                    <th rowspan="3" style="border:1px solid black;">Date</th>
+                    <th rowspan="3" style="border:1px solid black;">Article</th>
+                    <th colspan="2" style="border:1px solid black;">Principal</th>
+                    <th colspan="4" style="border:1px solid black;">Penalité de recouvrement (4%)</th>
+                    <th colspan="4" style="border:1px solid black;">TOTAL A PAYER</th>                     
+                </tr>
+                <tr> 
+                    <th style="border:1px solid black;" rowspan="2">FC</th>
+                    <th style="border:1px solid black;" rowspan="2">USD</th>
+                    <th style="border:1px solid black;" colspan="2">50% Province</th>
+                    <th style="border:1px solid black;" colspan="2">50% DGRNK</th>
+                    <th style="border:1px solid black;" colspan="2">Province</th>
+                    <th style="border:1px solid black;" colspan="2">DGRNK</th>
+                </tr>
+                <tr>
+                    <th style="border:1px solid black;">FC</th>
+                    <th style="border:1px solid black;">USD</th>
+                    <th style="border:1px solid black;">FC</th>
+                    <th style="border:1px solid black;">USD</th>
+                    <th style="border:1px solid black;">FC</th>
+                    <th style="border:1px solid black;">USD</th>
+                    <th style="border:1px solid black;">FC</th>
+                    <th style="border:1px solid black;">USD</th>
+                </tr>
+
+                
+                @foreach (Recovery recouvrement in lst.DetailMED(Request.Params["numMED"]))
+                {
+                    <tr>
+                        <td style="border:1px solid black;">@recouvrement.assessment_id</td>
+                        <td style="border:1px solid black;">@recouvrement.validation_date</td>
+                        <td style="border:1px solid black;">@recouvrement.tax_id</td>
+                        <td style="border:1px solid black;">@recouvrement.PrincFC</td>
+                        <td style="border:1px solid black;">@recouvrement.PrincUSD</td>
+                        <td style="border:1px solid black;">@recouvrement.PenProvFC</td>
+                        <td style="border:1px solid black;">@recouvrement.PenProvUSD</td>
+                        <td style="border:1px solid black;">@recouvrement.PenDGRNKFC</td>
+                        <td style="border:1px solid black;">@recouvrement.PenDGRNKUSD</td>
+                        <td style="border:1px solid black;">@recouvrement.TotProvFC</td>
+                        <td style="border:1px solid black;">@recouvrement.TotProvUSD</td>
+                        <td style="border:1px solid black;">@recouvrement.TotDGRNKFC</td>
+                        <td style="border:1px solid black;">@recouvrement.TotDGRNKUSD</td>
+                    </tr>
+                    
+                    PrincFC = PrincFC + recouvrement.PrincFC;
+                    PrincUSD = PrincUSD + recouvrement.PrincUSD;
+                    PenProvFC = PenProvFC + recouvrement.PenProvFC;
+                    PenProvUSD = PenProvUSD + recouvrement.PenProvUSD;
+                    PenDGRNKFC = PenDGRNKFC + recouvrement.PenDGRNKFC;
+                    PenDGRNKUSD = PenDGRNKUSD + recouvrement.PenDGRNKUSD;
+                    TotProvFC = TotProvFC + recouvrement.TotProvFC;
+                    TotProvUSD = TotProvUSD + recouvrement.TotProvUSD;
+                    TotDGRNKFC = TotDGRNKFC + recouvrement.TotDGRNKFC;
+                    TotDGRNKUSD = TotDGRNKUSD + recouvrement.TotDGRNKUSD;
+                }
+                <tr>
+                    <td style="border:1px solid black;" colspan="3">TOTAL</td>
+                    <td style="border:1px solid black;">@PrincFC</td>
+                    <td style="border:1px solid black;">@PrincUSD</td>
+                    <td style="border:1px solid black;">@PenProvFC</td>
+                    <td style="border:1px solid black;">@PenProvUSD</td>
+                    <td style="border:1px solid black;">@PenDGRNKFC</td>
+                    <td style="border:1px solid black;">@PenDGRNKUSD</td>
+                    <td style="border:1px solid black;">@TotProvFC</td>
+                    <td style="border:1px solid black;">@TotProvUSD</td>
+                    <td style="border:1px solid black;">@TotDGRNKFC</td>
+                    <td style="border:1px solid black;">@TotDGRNKUSD</td>
+                </tr>
+
+                @*@foreach (Recovery note in @ViewBag.lstrec)
+                {
+                    <tr>                        
+                        <td style="border:1px solid black;">@note.assessment_id</td>                                      
+                        <td style="border:1px solid black;">@note.validation_date</td>
+                        <td style="border:1px solid black;">@note.amount @note.currency</td>
+                        <td style="border:1px solid black;">@note.tax_name</td>
+                        <td style="border:1px solid black;">@note.descript</td>                        
+                    </tr>
+            
+                }*@
+            </table>
+
+                  <p style="text-indent:300px;">Conformément aux dispositions des articles 151 et 152 de
+                  l'Edit sus-évoqué, vous disposez de quatorze (14) jours pour acquitter ce montant sous peine
+                  du désagrément des mesures de poursuite qui pourraient être enclencher en votre encontre
+                  quant à ce.
+                  </p> 
+
+                  <p style="text-indent:300px;"> Veuillez agréer Monsieur/Madame/Messieurs, l'expression de nos
+                  sentiments civiques et patriotiques.</p>
+                 
+                 <div>
+                    <p style="text-indent:400px;">@rec.signator</p>
+                     <br /><br /><br /> 
+                   <p style="text-indent:520px;">Receveur</p>
+                 </div>
+
+                <div id="">
+                    <p>visa du chef hiérarchique</p>
+                    <p>@rec.visa</p>
+                    <br /><br /><br />
+                     <p style="text-indent:120px;"> chef de centre</p>
+                 </div>
+                   
+
+                @*<table>
+                    <tr>                        
+                        <td style="width:300px; text-align:left;">@ViewBag.signator</td>
+                        <td style="width:300px; text-align:center;">@ViewBag.visa</td>                        
+                    </tr>
+                    <tr>
+                        <td>.</td>
+                        <td>.</td>
+                    </tr>
+                    <tr>
+                        <td>.</td>
+                        <td>.</td>
+                    </tr>
+                    <tr>
+                        @if (Convert.ToString(ViewBag.function_signator) == "DR Directeur de Recouvrement")
+                        {
+                            <td style="width:300px; text-align:left;">Directeur de Recouvrement</td>
+                        }
+                        else
+                        {  
+                            <td style="width:300px; text-align:left;">@ViewBag.function_signator</td>
+                        }
+                        
+                        <td style="width:300px; text-align:center;">@ViewBag.function_visa</td>
+                    </tr>
+                </table>*@
+
+                <!--PIED DE PAGE-->
+        <hr color="black" />
+
+        <footer>
+            @rec.adresse
+            @*Avenue BAHIZI, N° 264, Quartier KAHEMBE, Commune de KARISIMBI (+243) 814745090 - 998295467, email : dgrnkdg@gmail.com*@
+        </footer>
+
+        </body>
+    </html>
+}
+catch (Exception ex)
+{
+       <h1 style="color:red;">@ex.Message</h1> 
+}
+
+

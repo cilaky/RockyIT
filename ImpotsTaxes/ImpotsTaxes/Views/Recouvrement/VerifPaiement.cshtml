@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+@using ImpotsTaxes.Models;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>VerifPaiement</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SaisirNumNote" onload="processus('VerifPaiement','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div> 
+      
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+      
+    <div id="feuille" style="position:absolute; top:150px; left:800px; width:500px; background-color:aliceblue;">
+        @*<h1>Message de verification de la note</h1>*@
+        @*<div style="width:200px; margin:auto;">*@
+                        
+            @{
+              ListesMED lst = new ListesMED();
+              if (lst.VerifNote(Request.Form["note"], Session["utilisateur"] as string) == "Oui")
+              {
+                  <h1>La Note @Request.Form["note"] est en souffrance</h1><br />
+                  <a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&art=&cent=&ant=&serv=&mont=&monn=&dtd=&dtf=&prov=&vil=&com=&quart=&av=&nat=&ass=@lst.IDAssujettiNote(Request.Form["note"])"  class="bouton">Suivant</a>
+              }  
+              else
+              {
+                  <h1>La Note @Request.Form["note"] est déjà payé ou n'existe pas dans le système</h1><br />
+                  <a href="/Recouvrement/RechercheNoteMED" class="bouton">Retour</a>
+              }
+            }
+
+        @*note: @Request.Form["note"] <br />
+
+        Utilisateur: @Session["utilisateur"] as string <br />
+
+        @lst.VerifNote(Request.Form["note"], Session["utilisateur"] as string)*@
+
+        @*<a href="/Recouvrement/RechercheNoteMED" class="bouton">Retour</a>
+        <a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&art=&cent=&ant=&serv=&mont=&monn=&dtd=&dtf=&prov=&vil=&com=&quart=&av=&nat=&ass="  class="bouton">Suivant</a>*@
+        </div>
+    @*</div>*@
+    @*<div>
+        <a href="#">Retour</a>
+        <a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&art=&cent=&ant=&serv=&mont=&monn=&dtd=&dtf=&prov=&vil=&com=&quart=&av=&nat=&ass=">Liste des Notes en souffrance</a>
+    </div>*@
+</body>
+</html>

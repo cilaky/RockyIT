@@ -1,0 +1,234 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AssujettisMED</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="AssujettisMED" onload="processus('AssujettisMED','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+    <!--AFFICHAGE DES ASSUJETTIS POUR LESQUELS ETABLIR LES MED-->
+    <!--======================================================-->
+    <div  style="position:absolute; top:60px; left:800px; width:2000px;">
+       
+@*        @Convert.ToInt32(Request.Params["inf"]), @Convert.ToInt32(Request.Params["sup"]), @Convert.ToDouble(ViewBag.mont)*@
+
+        <table>
+            <tr>
+            <th rowspan="2">N°</th>
+            <th rowspan="2">NOTE</th>
+            <th rowspan="2">DATE</th>
+            <th rowspan="2">MONTANT</th>
+            <th rowspan="2">ARTICLE</th>
+            <th rowspan="2">LIBELLE</th>
+            <th rowspan="2">NOM OU RAISON SOCIAL</th>
+            <th rowspan="2">TELEPHONE</th> 
+            <th rowspan="2">E-MAIL</th>                                   
+            <th colspan=4>ADRESSE</th>            
+            </tr>
+            <tr>                            
+            <th>Ville</th>                            
+            <th>Quartier</th>
+            <th>Avenue</th>
+            <th>Numero</th>
+
+            </tr>
+                            
+            @*@foreach (Recovery recouvrement in ViewBag.note)*@
+
+            @{  ListesMED lst = new ListesMED();
+                string action = Request.Params["action"];
+                switch (action)
+                {
+                    case "artMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDArticle(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"]), Request.Params["art"]))
+                        {
+                        <tr>
+                            
+                            <td>@recouvrement.nbre</td>
+                            <td>@recouvrement.assessment_id</td>
+                            <td>@recouvrement.validation_date</td>
+                            <td>@recouvrement.amount @recouvrement.currency</td>
+                            <td>@recouvrement.tax_id</td>
+                            <td>@recouvrement.tax_name</td>
+                            <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>
+                            <td>@recouvrement.telephone</td>
+                            <td>@recouvrement.email</td>
+                            <td>@recouvrement.town_dist</td>
+                            <td>@recouvrement.quarter_sect</td>
+                            <td>@recouvrement.avenue_loc</td>
+                            <td>@recouvrement.number</td>
+                        </tr>
+                        }
+                        break;
+
+                    case "antMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDAntenne(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"])))
+                        {
+                        <tr>
+                            <td>@recouvrement.nbre</td>
+                            <td>@recouvrement.assessment_id</td>
+                            <td>@recouvrement.validation_date</td>
+                            <td>@recouvrement.amount @recouvrement.currency</td>
+                            <td>@recouvrement.tax_id</td>
+                            <td>@recouvrement.tax_name</td>
+                            <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id">@recouvrement.taxpayer</a></td>
+                            <td>@recouvrement.telephone</td>
+                            <td>@recouvrement.email</td>
+                            <td>@recouvrement.town_dist</td>
+                            <td>@recouvrement.quarter_sect</td>
+                            <td>@recouvrement.avenue_loc</td>
+                            <td>@recouvrement.number</td>
+                        </tr>                        
+                        }
+                        break;
+
+                    case "dateMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDDate(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"]), Convert.ToDateTime(Request.Params["dtd"]), Convert.ToDateTime(Request.Params["dtf"])))
+                        {
+                         <tr>
+                            <td>@recouvrement.nbre</td>
+                            <td>@recouvrement.assessment_id</td>
+                            <td>@recouvrement.validation_date</td>
+                            <td>@recouvrement.amount @recouvrement.currency</td>
+                            <td>@recouvrement.tax_id</td>
+                            <td>@recouvrement.tax_name</td>
+                            <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id">@recouvrement.taxpayer</a></td>
+                            <td>@recouvrement.telephone</td>
+                            <td>@recouvrement.email</td>
+                            <td>@recouvrement.town_dist</td>
+                            <td>@recouvrement.quarter_sect</td>
+                            <td>@recouvrement.avenue_loc</td>
+                            <td>@recouvrement.number</td>
+                        </tr>
+                        }
+                        break;
+
+                    case "montMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDMontant(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"]), Convert.ToDouble(Request.Params["mont"]), Request.Params["monn"]))
+                        {
+                         <tr>
+                            <td>@recouvrement.nbre</td>
+                            <td>@recouvrement.assessment_id</td>
+                            <td>@recouvrement.validation_date</td>
+                            <td>@recouvrement.amount @recouvrement.currency</td>
+                            <td>@recouvrement.tax_id</td>
+                            <td>@recouvrement.tax_name</td>
+                            <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>
+                            <td>@recouvrement.telephone</td>
+                            <td style="width:0px;">@recouvrement.email</td>
+                            <td>@recouvrement.town_dist</td>
+                            <td>@recouvrement.quarter_sect</td>
+                            <td>@recouvrement.avenue_loc</td>
+                            <td>@recouvrement.number</td>
+                         </tr>
+                        }
+                        break;
+
+                    case "ctreSeulMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDCentre(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"])))
+                        {
+                            <tr>
+                                <td>@recouvrement.nbre</td>
+                                <td>@recouvrement.assessment_id</td>
+                                <td>@recouvrement.validation_date</td>
+                                <td>@recouvrement.amount @recouvrement.currency</td>
+                                <td>@recouvrement.tax_id</td>
+                                <td>@recouvrement.tax_name</td>
+                                <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>
+                                <td>@recouvrement.telephone</td>
+                                <td>@recouvrement.email</td>
+                                <td>@recouvrement.town_dist</td>
+                                <td>@recouvrement.quarter_sect</td>
+                                <td>@recouvrement.avenue_loc</td>
+                                <td>@recouvrement.number</td>
+                            </tr>
+                        }
+                        break;
+
+                    case "servMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDServ(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"]), Request.Params["ServAss"]))
+                        {
+                            <tr>
+                                <td>@recouvrement.nbre</td>
+                                <td>@recouvrement.assessment_id</td>
+                                <td>@recouvrement.validation_date</td>
+                                <td>@recouvrement.amount @recouvrement.currency</td>
+                                <td>@recouvrement.tax_id</td>
+                                <td>@recouvrement.tax_name</td>
+                                <td><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>
+                                <td>@recouvrement.telephone</td>
+                                <td>@recouvrement.email</td>
+                                <td>@recouvrement.town_dist</td>
+                                <td>@recouvrement.quarter_sect</td>
+                                <td>@recouvrement.avenue_loc</td>
+                                <td>@recouvrement.number</td>
+                            </tr>
+                        }
+                        break;
+
+                    case "centreMED":
+                        foreach (Recovery recouvrement in lst.ListeAssujettiMEDCentreAntServ(Session["utilisateur"] as string, Convert.ToInt32(Request.Params["inf"]), Convert.ToInt32(Request.Params["sup"])))
+                        {
+                            <tr>
+                                <td>@recouvrement.nbre</td>
+                                <td>@recouvrement.assessment_id</td>
+                                <td>@recouvrement.validation_date</td>
+                                <td>@recouvrement.amount @recouvrement.currency</td>
+                                <td>@recouvrement.tax_id</td>
+                                <td>@recouvrement.tax_name</td>
+                                <td style="width:350px;"><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>
+                                <td>@recouvrement.telephone</td>
+                                <td>@recouvrement.email</td>
+                                <td>@recouvrement.town_dist</td>
+                                <td>@recouvrement.quarter_sect</td>
+                                <td>@recouvrement.avenue_loc</td>
+                                <td>@recouvrement.number</td>
+                            </tr>
+                        }
+                        break;
+                }
+            
+           }               
+
+        </table>
+
+        <button name="precedente" onclick="Precedent();">Précédent</button>
+        <button name="suivant" onclick="Suivant();">Suivant</button> 
+
+        <script>
+            function Suivant() {
+                var inf = parseInt('@Request.Params["inf"]') + 10;
+                var sup = parseInt('@Request.Params["sup"]') + 10;
+                //var intInf = (int)inf + 10;
+                window.location.href = '/Recouvrement/AssujettisMED?action=@Request.Params["action"]&mont=@Request.Params["mont"]&monn=@Request.Params["monn"]&dtd=@Request.Params["dtd"]&dtf=@Request.Params["dtf"]&art=@Request.Params["art"]&ServAss=@Request.Params["ServAss"]&inf=' + inf + '&sup=' + sup;
+                //alert(inf);
+            }
+
+            function Precedent() {
+                var inf = parseInt('@Request.Params["inf"]') - 10;
+                var sup = parseInt('@Request.Params["sup"]') - 10;
+                //var intInf = (int)inf + 10;
+                window.location.href = '/Recouvrement/AssujettisMED?action=@Request.Params["action"]&mont=@Request.Params["mont"]&monn=@Request.Params["monn"]&dtd=@Request.Params["dtd"]&dtf=@Request.Params["dtf"]&art=@Request.Params["art"]&ServAss=@Request.Params["ServAss"]&inf=' + inf + '&sup=' + sup;
+                //alert(inf);
+            }
+        </script>
+        
+    </div>
+    
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+</body>
+</html>

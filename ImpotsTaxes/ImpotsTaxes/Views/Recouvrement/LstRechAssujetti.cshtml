@@ -1,0 +1,63 @@
+﻿@using ImpotsTaxes.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>LstRechAssujetti</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SaisirNumNote" onload="processus('LstRechAssujetti','@Request.Params["action"]');">
+    
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+   
+    <div id="processus" style="opacity:0.6;">
+        
+    </div>
+    <div  style="position:absolute; top:60px; left:800px; width:1000px;">
+    <table >
+			 <tr>
+                    
+                    <th rowspan="2">NOM OU RAISON SOCIAL</th>
+                    <th rowspan="2">TELEPHONE</th>
+                    <th rowspan="2">E-MAIL</th>
+                    <th colspan="5">ADESSE</th>
+           </tr>
+           <tr>
+                    <th >VILLE</th>
+                    <th >COMMUNE</th>
+                    <th >QUARTIER</th>
+                    <th >AVENUE</th>
+                    <th >NUMERO</th>
+                                      
+            </tr>
+            <tr>                            
+                    
+            </tr>
+                    @{ListesMED lst = new ListesMED();}
+                    @foreach (Recovery recouvrement in lst.RechercheAssujetti(ViewBag.noms))
+                    {
+                        <tr>
+                           <td><a href="/Recouvrement/LstnotesouffAss?action=@Request.Params["action"]&ass=@recouvrement.taxpayer_id&vil=@recouvrement.town_dist&com=@recouvrement.commune&quart=@recouvrement.quarter_sect&av=@recouvrement.avenue_loc&num=@recouvrement.number&tel=@recouvrement.telephone">@recouvrement.taxpayer</a></td>                           <td>@recouvrement.telephone </td>
+                           <td>@recouvrement.email </td>
+                            <td>@recouvrement.town_dist </td>
+                           <td>@recouvrement.commune</td>                           
+                           <td>@recouvrement.quarter_sect </td>
+                           <td>@recouvrement.avenue_loc </td>
+                           <td>@recouvrement.number</td>
+                        </tr>
+                    }								
+		    </table>
+        </div>
+</body>
+</html>

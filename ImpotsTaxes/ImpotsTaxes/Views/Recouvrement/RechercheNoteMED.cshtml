@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>RechercheNoteMED</title>
+
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+</head>
+<body id="EtablirMED" onload="processus('RechercheNoteMED','@Request.Params["action"]');">
+
+    <div>
+        <h1 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h1>
+    </div>
+
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px;">
+        <h2 style="text-align:center;">PROCESSUS</h2>
+    </div>
+
+    <div style="position:absolute; top:60px; left:800px; width:500px; background-color:aliceblue;">
+        <h2 style="text-align:center;">CRITERES DE SELECTION</h2>
+        Vous pouvez établir les mises en demeure selon les critères suivant:
+        <ul>
+            <li>Un numéro d'une note de perception;</li>
+            <li>Un assujetti, en le recherchant par son nom;</li>
+            <li>Un article, en affichant toutes les notes en souffrance de l'article sélecionné;</li>
+            <li>Le centre de l'utilisateur en cours;</li>
+            <li>Le centre y compris les antennes et les services d'assiettes;</li>
+            <li>Une antenne, en sélectionnant une des antennes du centre de l'utilisateur;</li>
+            <li>Un service d'assiette qui a taxé pour le compte du centre;</li>
+            <li>Un interval des montants, en spécifiant la borne inférieur;</li>
+            <li>Une période;</li>
+            <li>Une avenue, en spécifiant la province, ville, commune et le quartier;</li>
+            <li>La natrure de la base imposable, par exemple établir les MED pour les boutiques, les alimentations, etc.</li>
+        </ul>
+        Il suffit de cliquer sur un des liens clignotants dans le processus ou sur le lien dans le texte selon votre choix.
+
+        <h3>EDIT  N°001/2018 DU 27 JANVIER 2018 FIXANT LES REGLES DE PERCEPTION DES IMPOTS, DROITS, TAXES ET REDEVANCES DE LA PROVINCE DU NORD-KIVU ET DE SES ENTITES TERRITORIALES DECENTRALISEES</h3>
+        <h5>Faiblesse de l'Edit 002/2013</h5>
+        <strong>Page 2: </strong>-	l’imposition de l’avis de mise en recouvrement même dans le cas où l’assujetti disposait d’une note de perception consécutivement à sa déclaration auto-liquidative librement faite ; créant ainsi non seulement un double emploi, la note de perception étant un titre exécutoire de même nature que l’avis de mise en recouvrement, mais aussi un étirement inutile des délais d’encaissement des recettes publiques.
+
+        <h5>Merite de l'Edit 001/2018</h5>
+        <strong>Page 3: </strong>-	de l’extension à quatorze (14) jours des délais de payement d’une note de perception et des délais de certaines procédures dont la relance, la mise en demeure, la mise en recouvrement ;<br />
+-	de la réduction à 4% du taux des pénalités de recouvrement<br />
+-	de l’institution d’un mécanisme d’émission électronique de certains actes de procédure notamment : la déclaration fiscale, la note de perception, la mise en demeure, l’avis de mise en recouvrement, la contrainte, l’avis à tiers détenteurs, l’avis de taxation d’office, l’avis de redressement, l’avis de non-redressement, l’avis de non-lieu ;
+
+        <h5>PROCEDURE</h5>
+        <div><strong>Article 151:</strong>En cas d’échec du recouvrement à l’amiable des impôts, droits, taxes et redevances de la Province du Nord-Kivu ou de l’entité territoriale décentralisée ainsi qu’en cas de non-reversement, dans les délais, par l’intervenant des fonds perçus, il est fait recours aux mécanismes de recouvrement par voie soit de mise en demeure soit d’avis de mise en recouvrement.<br />
+Sous réserve des dispositions particulières du présent édit relatives à la perception électronique des impôts, droits, taxes et redevances de la Province du Nord-Kivu et de ses entités territoriales décentralisées, la mise en demeure et l’avis de mise en recouvrement sont dressés par le Receveur de l’Administration des recettes provinciales ou locales et visés par son chef hiérarchique.<br />
+Les assujettis disposent d’un délai de quatorze (14) jours pour payer leurs dettes. </div>
+
+        <div>
+            <strong>Article 152: </strong> Sous réserve des dispositions particulières du présent édit relatives à la perception électronique des impôts, droits, taxes et redevances de la Province du Nord-Kivu et de ses entités territoriales décentralisées, la mise en demeure et l’avis de mise en recouvrement sont envoyés au redevable avec accusé de réception ou remis en mains propre sous bordereau de décharge. <br />
+Ces actes doivent contenir les éléments ci-après : 
+            <ol>
+                <li>l’identité complète du redevable ;</li>
+                <li>la nature des impôts, droits, taxes et/ou redevances dus ;</li>
+                <li>la base imposable ;</li>
+                <li>le montant en principal des droits mis à sa charge ;</li>
+                <li>le montant des pénalités ;</li>
+                <li>le délai de paiement ; et, le cas échéant, le numéro de la note de perception.</li>
+            </ol>
+        </div>
+        <div>
+            <strong>Article 153: </strong> Les notes de perception ainsi que les avis de mise en recouvrement non suivis des paiements dans les délais font l’objet de poursuites en recouvrement. <br />
+Les poursuites s'exercent en vertu des contraintes décernées par le Receveur des recettes à un Huissier du trésor.
+Le Receveur des impôts, en sa qualité de comptable public assignataire des recettes, est désigné et prête serment avant son installation dans les conditions déterminées par voie réglementaire.
+        </div>
+        <div>
+           <strong>Article 155: </strong> En cas de déclaration sans paiement de la note de perception ou de non-respect de l’échéancier de la procédure de paiement échelonné, le redevable fait l'objet d'une mise en demeure l'invitant à payer dans un délai de quatorze (14) jours.
+        </div>
+        <div>
+           <strong>Article 156: </strong>  A l'expiration des délais prévus aux articles 151, 154 et 155 du présent édit, selon le cas, un commandement est signifié au redevable lui enjoignant de payer dans les quatorze (14) jours francs sous peine d'exécution des mesures de poursuite.<br />
+Le commandement est signifié par l’agent de l’Administration des recettes provinciales ou locales commissionné en qualité d’Huissier du trésor par Arrêté du Ministre provincial ou par décision de l’Echevin ayant les Finances dans ses attributions et porteur de contraintes à la requête du Receveur des impôts.  
+Toutefois, les Huissiers de justice peuvent également exercer les mêmes poursuites à la demande du Receveur des impôts.
+        </div>
+    </div>
+     
+</body>
+</html>

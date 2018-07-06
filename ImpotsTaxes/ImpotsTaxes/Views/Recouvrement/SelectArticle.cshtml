@@ -1,0 +1,50 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectArticle</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SelectArticle" onload="processus('SelectArticle','@Request.Params["action"]');">
+       
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+    <div style="position:absolute; top:60px; left:800px; width:800px; z-index:1;">
+        
+        <table >
+			    <tr>
+                    <th>N°</th>
+                    <th>ARTICLE</th>
+                    <th>DESIGNATION</th>
+                    <th> FACTEUR GENERATEUR</th>
+                    <th>PERIODICITE</th>
+                </tr>
+                    @{ListesMED lst = new ListesMED();}
+                    @foreach (Article article in lst.ListArticle())
+                    {
+                        <tr>
+                            <td>@article.nbre</td>
+                            <td><a href="/Recouvrement/AssujettisMED?action=@Request.Params["action"]&art=@article.tax_id&inf=0&sup=10">@article.tax_id </a></td>
+                            <td>@article.tax_name </td>
+                            <td>@article.generating_fact </td> 
+                            <td>@article.periodicity </td>                            
+                        </tr>
+                    }								
+		    </table>
+    </div>
+    
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px; z-index:2;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+</body>
+</html>

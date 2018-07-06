@@ -1,0 +1,42 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectProv</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <link type="text/css" rel="stylesheet" href="../../Content/styleTable.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SelectProv" onload="processus('SelectProv','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>
+    </div>
+
+    <div style="position:absolute; top:60px; left:800px; width:800px; z-index:1;">
+        <table >
+			    <tr>
+                    <th>N°</th>
+                    <th>PROVINCE</th>
+                </tr>
+                    @{ListesMED lst = new ListesMED();}
+                    @foreach (Adresse province in lst.ListProvince())
+                    {
+                        <tr>
+                            <td>@province.nbre</td>
+                            <td><a href="/Recouvrement/SelectVille?action=@Request.Params["action"]&prov=@province.province">@province.province </a></td>
+                        </tr>
+                    }
+        </table>
+    </div>
+        
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px; z-index:2;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+</body>
+</html>

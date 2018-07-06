@@ -1,0 +1,607 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    
+    <div>
+
+        <!--=====PROCESSUS DE RECOUVREMENT=========-->
+        <canvas id="mycanvas" width="1100" height="900" style="border:3px blue dashed;">
+            <p style="color:rgb(255, 0, 0);">Mettez votre navigateur à jour pour continuer!</p>
+        </canvas>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById("mycanvas");
+            var context = canvas.getContext("2d");
+
+            //context.fillRect(340, 20, 600, 800);
+
+            //Frontiere
+            //=========
+            context.moveTo(340, 10);
+            context.lineTo(1080, 10);
+            context.stroke();
+
+            context.moveTo(340, 10);
+            context.lineTo(340, 1000);
+            context.stroke();
+
+            context.moveTo(1080, 10);
+            context.lineTo(1080, 1000);
+            context.stroke();
+
+            context.moveTo(340, 900);
+            context.lineTo(1080, 900);
+            context.stroke();
+
+            context.font = "40px Arial";
+            context.textAlign = "center";
+            context.fillText("RECOUVREMENT", canvas.width / 2, 50);
+
+            //Receveur
+            receveur = new Image();
+            receveur.onload = function () {
+                context.drawImage(receveur, 0, 300, 160, 106);
+            }
+            receveur.src = '../../Content/images/taxateur.jpg';
+
+            context.font = "20px Arial";
+            context.textAlign = "center";
+            context.fillText("Receveur", 80, 430);
+
+            //Afficher le rapport des recettes encaissées
+            //===========================================
+
+
+            rapportre = new Image();
+            rapportre.onload = function () {
+                context.drawImage(rapportre, 360, 60, 120, 110);
+            }
+            rapportre.src = '../../Content/images/Rapport_recette_encaissee.jpeg';
+
+            context.textAlign = "left";
+            context.font = "13px Arial";
+            context.fillText("Afficher le rapport des ", 360, 185);
+            context.fillText("recettes encaissées", 360, 200);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 76", 360, 220);
+
+
+            //Association Afficher le rapport des recettes encaissées
+            //=======================================================
+            context.moveTo(160, 340);
+            context.lineTo(360, 100);
+            context.stroke();
+
+            //Afficher le rapport de cloture des opérations journalière
+            //=========================================================
+            rapportj = new Image();
+            rapportj.onload = function () {
+                context.drawImage(rapportj, 700, 110, 100, 80);
+            }
+            rapportj.src = '../../Content/images/Rapport_clotureOperation.jpg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Afficher le rapport de  ", 700, 210);
+            context.fillText("cloture des opérations", 700, 225);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 139, 145", 700, 240);
+
+            //Association Afficher le rapport de cloture des opérations journalière
+            //=====================================================================
+            context.moveTo(160, 340);
+            context.lineTo(735, 180);
+            context.stroke();
+
+            //Apurer
+            //======
+            apurer = new Image();
+            apurer.onload = function () {
+                context.drawImage(apurer, 540, 100, 100, 80);
+            }
+            apurer.src = '../../Content/images/rapportCloture.png';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Apurer  ", 540, 200);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 137,77", 540, 215);
+
+            //Association Apurer
+            //==================
+            context.moveTo(160, 340);
+            context.lineTo(600, 155);
+            context.stroke();
+
+            context.lineWidth = 1.2;
+      
+            //Saisir les contestations formulées par l'assujeti
+            //==========================================================
+            constatation = new Image();
+            constatation.onload = function () {
+                context.drawImage(constatation, 500, 320, 100, 80);
+            }
+            constatation.src = '../../Content/images/Saisie.jpg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("saisir les contestations", 500, 420);
+            context.fillText(" formulées par l'assujetti", 500, 435);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 163", 500, 450);
+
+            //Association Saisir les contestations formulées par l'assujeti
+            //=============================================================
+            context.moveTo(160, 340);
+            context.lineTo(500, 370);
+            context.stroke();
+
+            //Délivrer l'acquit liberatoire
+            //=============================
+            acquitlib = new Image();
+            acquitlib.onload = function () {
+                context.drawImage(acquitlib, 900, 100, 91, 90);
+            }
+            acquitlib.src = '../../Content/images/Acquit_liberatoire.jpg';
+
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Délivrer l'acquit liberatoire", 900, 205);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 109", 900, 220);
+
+            //Association Délivrer l'acquit liberatoire
+            //=========================================
+            context.moveTo(160, 340);
+            context.lineTo(700, 260);
+            context.stroke();
+
+            context.moveTo(700, 260);
+            context.lineTo(850, 240);
+            context.stroke();
+
+            context.moveTo(850, 239);
+            context.lineTo(900, 170);
+            context.stroke();
+
+            //Saisir la décision aux contestations de l'assujetti
+            //===================================================
+            decisionc = new Image();
+            decisionc.onload = function () {
+                context.drawImage(decisionc, 700, 290, 100, 80);
+            }
+            decisionc.src = '../../Content/images/modification.jpg';
+
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Saisir la décision aux", 700, 382);
+            context.fillText("contestations de l'assujetti", 700, 397);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 163, 180-186", 700, 412);
+
+            //Association Saisir la décision aux contestations de l'assujetti
+            //===============================================================
+            context.moveTo(160, 340);
+            context.lineTo(700, 300);
+            context.stroke();
+
+
+            //Afficher la reddition de compte
+            //================================
+            reddition = new Image();
+            reddition.onload = function () {
+                context.drawImage(reddition, 360, 490, 100, 80);
+            }
+            reddition.src = '../../Content/images/reddition_compte.jpeg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Afficher la reddition ", 360, 585);
+            context.fillText("de compte", 360, 600);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 88, 87, 142, 145", 360, 615);
+
+            //Association Afficher la reddition de compte
+            //============================================
+            context.moveTo(160, 340);
+            context.lineTo(360, 550);
+            context.stroke();
+
+            //Elaborer une demande de saisie au tier detenteur
+            //================================================
+            elaborerdem = new Image();
+            elaborerdem.onload = function () {
+                context.drawImage(elaborerdem, 900, 240, 100, 80);
+            }
+            elaborerdem.src = '../../Content/images/Image_ordonancer.jpg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Elaborer une demande de ", 900, 335);
+            context.fillText("saisie au tier detenteur", 900, 350);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 166", 900, 365);
+
+            //Association Elaborer une demande de saisie au tier detenteur
+            //============================================================
+            context.moveTo(160, 340);
+            context.lineTo(900, 265);
+            context.stroke();
+
+
+
+            //Accorder un paiement echelonné à l'assujetti
+            //===================================================
+            accorderpaie = new Image();
+            accorderpaie.onload = function () {
+                context.drawImage(accorderpaie, 920, 380, 100, 80);
+            }
+            accorderpaie.src = '../../Content/images/Accorder_paiement.jpg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Accorder un paiement", 920, 470);
+            context.fillText("echelonné à l'assujetti", 920, 485);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText(" Art 149", 920, 500);
+
+            //Association Accorder un paiement echelonné à l'assujetti
+            //========================================================
+            context.moveTo(160, 340);
+            context.lineTo(500, 455);
+            context.stroke();
+
+            context.moveTo(500, 455);
+            context.lineTo(920, 430);
+            context.stroke();
+
+            //Annuler la créance
+            //==================
+            Annulercréance = new Image();
+            Annulercréance.onload = function () {
+                context.drawImage(Annulercréance, 370, 795, 80, 75);
+            }
+            Annulercréance.src = '/Content/images/annuler_creance.jpeg';
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Annuler la créance", 370, 880);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 186", 370, 895);
+
+            //Association Annuler la créance
+            //==============================
+            context.moveTo(160, 340);
+            context.lineTo(370, 840);
+            context.stroke();
+
+            //Afficher la situation Fiscale de l'Assujettis
+            //=============================================
+            SituationFiscal = new Image();
+            SituationFiscal.onload = function () {
+                context.drawImage(SituationFiscal, 500, 770, 100, 90);
+            }
+            SituationFiscal.src = '/Content/images/Reste_Recouvr.jpg';
+            context.fillStyle = "rgb(0,0,0)";
+            context.fillText("Afficher la situation ", 500, 870);
+            context.fillText("fiscale de l'Assujetti ", 500, 885);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("P 8", 500, 899);
+
+            //Afficher la situation fiscale de l'Assujetti
+            //============================================
+
+            context.moveTo(160, 340);
+            context.lineTo(350, 760);
+            context.stroke();
+
+            context.moveTo(350, 760);
+            context.lineTo(500, 810);
+            context.stroke();
+
+            //Afficher une note de perception 
+            //===============================
+            note = new Image();
+            note.onload = function () {
+                context.drawImage(note, 590, 475, 90, 80);
+            }
+            note.src = '/Content/images/note.jpg';
+            context.fillStyle = "rgb(0,0,0)";
+            context.fillText("Afficher une note", 590, 570);
+            context.fillText("de perception", 590, 585);
+
+            //Association Afficher une note de perception
+            //==========================================
+
+            context.moveTo(160, 340);
+            context.lineTo(590, 515);
+            context.stroke();
+
+            //Saisir les Accusés de reception
+            //===============================
+
+            Saisiraccuse = new Image();
+            Saisiraccuse.onload = function () {
+                context.drawImage(Saisiraccuse, 820, 580, 90, 80);
+            }
+            Saisiraccuse.src = '/Content/images/saisie2.jpg';
+            context.fillStyle = "rgb(0,0,0)";
+            context.fillText("Saisir les accu-", 820, 672);
+            context.fillText("sés de reception", 820, 687);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 143", 820, 702);
+
+            //Association Saisir les Accusés de reception
+            //============================================
+            
+            context.moveTo(160, 340);
+            context.lineTo(590, 590);
+            context.stroke();
+
+            context.moveTo(590, 590);
+            context.lineTo(820, 620);
+            context.stroke();
+
+            //Suspendre la poursuite
+            //=======================
+
+            Suspoursuite = new Image();
+            Suspoursuite.onload = function () {
+                context.drawImage(Suspoursuite, 370, 635, 90, 80);
+            }
+            Suspoursuite.src = '/Content/images/Suspension.jpg';
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText("Suspendre ", 370, 730);
+            context.fillText("la poursuite", 370, 745);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 164", 370, 760);
+            context.fillStyle = "rgb(9,224,96)";
+
+            //Association Suspendre la poursuite
+            //========================
+
+            context.moveTo(160, 340);
+            context.lineTo(370, 690);
+            context.stroke();
+
+            //Etablir un PV de saisie concervatoire
+            //=====================================
+
+            pv = new Image();
+            pv.onload = function () {
+                context.drawImage(pv, 740, 450, 90, 80);
+            }
+            pv.src = '/Content/images/pv.jpg';
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText("Etablir un PV de sai-", 740, 545);
+            context.fillText("sie concervatoire", 740, 560);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 162", 740, 575);
+
+            //Association Etablir un PV de saisie concervatoire
+            //=================================================
+
+            context.moveTo(160, 340);
+            context.lineTo(500, 470);
+            context.stroke();
+
+            context.moveTo(500, 470);
+            context.lineTo(740, 470);
+            context.stroke();
+
+            //Afficher le rapport des restes à recouvrer
+            //==========================================
+            Reste = new Image();
+            Reste.onload = function () {
+                context.drawImage(Reste, 500, 610, 80, 50);
+            }
+            Reste.src = '/Content/images/extrait.jpg';
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText("Afficher le rapport", 500, 675);
+            context.fillText("de restes à recouvrir", 500, 690);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 137", 500, 705);
+
+            //Afficher le rapport des restes à recouvrir
+            //=========================================
+            context.moveTo(160, 340);
+            context.lineTo(360, 630);
+            context.stroke();
+
+            context.moveTo(360, 630);
+            context.lineTo(500, 630);
+            context.stroke();
+
+            //Etablir le commendement de paie
+            //===============================
+            Apurements = new Image();
+            Apurements.onload = function () {
+                context.drawImage(Apurements, 980, 600, 90, 80);
+            }
+            Apurements.src = '/Content/images/feuilleCalcul.jpg';
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText("Etablir le com- ", 980, 700);
+            context.fillText("mendement", 980, 715);
+            context.fillText("de paie", 980, 730);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 140,156,177", 980, 745);
+
+            //Suivre la procedure de recouvrement
+            //====================================
+            //context.strokeStyle = "rgb(255, 216, 0)";
+            context.fillStyle = "rgb(255, 216,220)";
+            //context.scale(1, 0.5);
+            context.beginPath();
+            context.arc(700, 660, 50, 0, 2 * Math.PI);
+            //context.arc(700, 660,30, 1, 4 * Math.PI);
+            context.fill();
+            context.stroke();
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("Suivre la  ", 670, 640);
+            context.fillText("procedure de", 660, 660);
+            context.fillText("recouvrement ", 660, 680);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 61", 680, 695);
+
+            //Association Suivre la procedure de recouvrement
+            //================================================          
+            context.moveTo(160, 340);
+            context.lineTo(650, 650);
+            context.stroke();
+
+            //Contrainte
+            //==========
+            contrainte = new Image();
+            contrainte.onload = function () {
+                context.drawImage(contrainte, 870, 720, 70, 70);
+            }
+            contrainte.src = '/Content/images/contrainte.jpeg';
+
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText("Contrainte ", 870, 800);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 153", 870, 815);
+
+            //AMR
+            //===
+            amr = new Image();
+            amr.onload = function () {
+                context.drawImage(amr, 770, 780, 70, 70);
+            }
+            amr.src = '/Content/images/AMR_OK.jpeg';
+
+            context.fillStyle = 'rgb(0,0,0)';
+            context.font = "12px Arial";
+            context.fillText("AMR ", 770, 860);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 109,151,", 770, 875);
+            context.fillText("152,154", 792, 890);
+
+            //MED
+            //===
+            med = new Image();
+            med.onload = function () {
+                context.drawImage(med, 650, 800, 90, 70);
+            }
+            med.src = '/Content/images/MED_3.png';
+
+            context.fillStyle = 'rgb(0,0,0)';
+            //context.font = "12px Arial";
+            context.fillText("MED ", 650, 880);
+            context.fillStyle = "rgb(9,224,96)";
+            context.fillText("Art 151,152", 650, 895);
+
+            //RELATION D'EXTENSION ENTRE ETABLIR LE COMMENDEMENT DE PAIE ET CONTRAINTE
+            //========================================================================
+            context.moveTo(980, 660);
+            context.lineTo(940, 760);
+            context.stroke();
+
+            context.fillStyle = "rgb(0, 0, 0)";
+            context.fillText("<<Etend>>", 920, 720);
+
+            //Fleche            
+            context.moveTo(940, 760);
+            context.lineTo(945, 735);
+            context.stroke();
+            context.moveTo(940, 760);
+            context.lineTo(955, 740);
+            context.stroke();
+
+
+            //RELATION DE GENERALISATION ENTRE CONTRAINTE ET SUIVRE LA PROC. DE RECOUVREMENT
+            //==============================================================================
+
+            context.moveTo(870, 750);
+            context.lineTo(755, 690);
+            context.stroke();
+
+            //Triangle          
+            context.moveTo(745, 680);
+            context.lineTo(760, 680);
+            context.stroke();
+
+            context.moveTo(745, 680);
+            context.lineTo(750, 700);
+            context.stroke();
+
+            context.moveTo(750, 700);
+            context.lineTo(760, 680);
+            context.stroke();
+
+            //RELATION DE GENERALISATION ENTRE MCD ET SUIVRE LA PROC. DE RECOUVREMENT
+            //==============================================================================
+
+            context.moveTo(675, 800);
+            context.lineTo(682.5, 720);
+            context.stroke();
+
+            //Triangle          
+            context.moveTo(683, 705);
+            context.lineTo(675, 720);
+            context.stroke();
+
+            context.moveTo(683, 705);
+            context.lineTo(690, 720);
+            context.stroke();
+
+            context.moveTo(675, 720);
+            context.lineTo(690, 720);
+            context.stroke();
+
+            //RELATION DE GENERALISATION ENTRE AMR ET SUIVRE LA PROC. DE RECOUVREMENT
+            //==============================================================================
+
+            context.moveTo(800, 780);
+            context.lineTo(732, 712);
+            context.stroke();
+
+            //Triangle          
+            context.moveTo(725, 703);
+            context.lineTo(728, 720);
+            context.stroke();
+
+            context.moveTo(725, 703);
+            context.lineTo(740, 705);
+            context.stroke();
+
+            context.moveTo(740, 705);
+            context.lineTo(728, 720);
+            context.stroke();
+
+            /************************
+            *       EVENEMENT       *
+            *************************/
+            canvas.addEventListener("click", function (e) {
+                if (e.clientX > 630 && e.clientY > 500 && e.clientX < 740 && e.clientY < 890) {
+                    //alert("Locataires");
+                    window.location.href = "/Recouvrement/RechercheNoteMED";
+                }
+                /*
+                if (e.clientX > 0 && e.clientY > 150 && e.clientX < 124 && e.clientY < 274) {
+                    alert("Bailleur");
+                }
+
+                if (e.clientX > 150 && e.clientY > 80 && e.clientX < 274 && e.clientY < 204) {
+                    alert("Logo");
+                }*/
+            });
+
+            canvas.onmousemove = function (e) {
+                //canvas.style.cursor = "pointer";
+                if (e.clientX > 630 && e.clientY > 500 && e.clientX < 740 && e.clientY < 890) {
+                    canvas.style.cursor = "pointer";
+                }
+                else {
+                    canvas.style.cursor = "default";
+                }
+            }
+
+        </script>
+        
+        <div style="color:rgb(255, 216, 0);"></div>
+    </div>
+</body>
+</html>

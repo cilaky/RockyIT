@@ -1,0 +1,34 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+@try
+{
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ModeAffMED</title>
+    <meta charset="utf-8" http-equiv="refresh" content="10; url=/Recouvrement/RechercheNoteMED" />
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />
+</head>
+<body>
+    <div>
+         @{
+            ListesMED lst = new ListesMED();
+            lst.EnregistrerMED(Request.Params["numOrd"], Request.Params["numMED"], Request.Params["ass"], Session["utilisateur"] as string);
+           }
+        @Request.Params["numOrd"] <br />
+        @Request.Params["numMED"] <br />
+        @Request.Params["ass"] <br />
+        <a href="/Recouvrement/MED?numMED=@Request.Params["numMED"]" class="bouton" target="_blank">Afficher la Mise en Demeure sur la page</a> &nbsp; &nbsp;
+        <a href="#" class="bouton">Générer la Mise en Demeure en PDF</a>
+    </div>
+</body>
+</html>
+}
+catch(Exception ex)
+{
+    <h1 style="color:red;">@ex.Message</h1>
+}

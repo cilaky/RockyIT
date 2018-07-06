@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SaisirDate</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" /> 
+    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
+    <script type="text/javascript" src="../../Content/etablirMED.js"></script>
+</head>
+<body id="SaisirDate" onload="processus('SaisirDate','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR LES MISES EN DEMEURE</h2>     
+    </div>
+
+    <div id="processus" style="position:absolute; top:60px; left:10px; width:800px; z-index:2;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+    <div id="feuille" style="position:absolute; top:150px; left:600px; width:500px; background-color:aliceblue;">
+        <form method="post" action="/Recouvrement/AssujettisMED?action=@Request.Params["action"]&dtd=@Request.Form["dtd"]&dtf=@Request.Form["dtf"]">
+            
+            <fieldset>
+                <legend>
+                    Saisir la date de la Mise en demeure
+                </legend>
+                <table>
+                    <tr>
+                        <td>Date Debut:</td>
+                        <td><input type="Date" name="dateDebut" id="dateDebut" required/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Date Fin:</td>
+                        <td><input type="Date" name="dateFin" id="dateFin" required/></td>
+                    </tr>
+                   @* <tr>
+                        <td></td>
+                        <td><input type="submit" value="Envoyer" /></td>
+                    </tr>*@
+                </table>
+            </fieldset>
+                         
+        </form>
+        <button name="suivant" onclick="AssujettiMED();">Envoyer</button>
+
+        <script>
+            function AssujettiMED() {
+                window.location.href = '/Recouvrement/AssujettisMED?action=@Request.Params["action"]&dtd=' + document.getElementById("dateDebut").value + '&dtf=' + document.getElementById("dateFin").value + '&inf=0&sup=25';
+            }
+        </script>
+    </div>
+</body>
+</html>
