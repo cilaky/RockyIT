@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseImposableController.cs" />
+    <Compile Include="Controllers\DeclarationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RecouvrementController.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\BaseImposable.cs" />
     <Compile Include="Models\DBConnection.cs" />
+    <Compile Include="Models\Declaration.cs" />
     <Compile Include="Models\Entite.cs" />
     <Compile Include="Models\Liste.cs" />
     <Compile Include="Models\ListesMED.cs" />
@@ -125,6 +127,7 @@
     <Content Include="Content\designCalendrier.css" />
     <Content Include="Content\designComposant.css" />
     <Content Include="Content\enteteDGRNK.jpg" />
+    <Content Include="Content\EtablirDeclaration.js" />
     <Content Include="Content\etablirFeuilleCal.js" />
     <Content Include="Content\etablirMED.js" />
     <Content Include="Content\etablirMED1.js" />
@@ -373,6 +376,21 @@
     <Content Include="Views\Taxation\SearchTPbyName.cshtml" />
     <Content Include="Views\Taxation\SelectionArticle.cshtml" />
     <Content Include="Views\Taxation\SelectNote.cshtml" />
+    <Content Include="Views\Declaration\AffichagePropriete.cshtml" />
+    <Content Include="Views\Declaration\AfficherDeclaration.cshtml" />
+    <Content Include="Views\Declaration\ElaborDeclaration.cshtml" />
+    <Content Include="Views\Declaration\EnregistrerBaseImp.cshtml" />
+    <Content Include="Views\Declaration\EnregistrerDeclaration.cshtml" />
+    <Content Include="Views\Declaration\EnregistrerPersonne.cshtml" />
+    <Content Include="Views\Declaration\EnregistrerProprieteDec.cshtml" />
+    <Content Include="Views\Declaration\EnregistrerProprieteDeclare.cshtml" />
+    <Content Include="Views\Declaration\Index.cshtml" />
+    <Content Include="Views\Declaration\RechercherAssujetti.cshtml" />
+    <Content Include="Views\Declaration\SaisieCoordonneesEntreprise.cshtml" />
+    <Content Include="Views\Declaration\SaisirCoordonneesEntreprise.cshtml" />
+    <Content Include="Views\Declaration\SaisirElementsBaseImp.cshtml" />
+    <Content Include="Views\Declaration\SelectForme.cshtml" />
+    <Content Include="Views\Declaration\SelectNature.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
