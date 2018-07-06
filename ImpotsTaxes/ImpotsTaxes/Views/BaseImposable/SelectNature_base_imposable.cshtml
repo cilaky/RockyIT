@@ -1,0 +1,40 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectNature_base_imposable</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+</head>
+<body id="SelectNaturebaseimposable" onload="processus('SelectNaturebaseimposable','@Request.Params["action"]');">
+    <div id="processus" style="position:absolute; top:60px; left:300px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+        <h2>Séléctionner la nature de la base imposable</h2>
+            <a href="/BaseImposable/SaisieNature_base_imposable" class="button" > Nouvelle nature </a>                    
+	        <table border="1">
+		        <tr>
+                    <th>N°</th>
+                    <th>NATURE</th>
+                    <th>SELECTION</th>
+                </tr>
+
+                @{BaseImposable nat = new BaseImposable();}
+                @foreach (BaseImposable natBas in nat.Nature_Base_Imposable())
+                {
+                    <tr >
+                        <td>@natBas.nbr</td>
+                        <td>@natBas.nature </td>                                                                                                                                              
+                        <td><a href="/BaseImposable/SelectProv?action=@Request.Params["action"]&feuil=@Request.Params["feuil"]&ass=@Request.Params["ass"]&nat=@natBas.nature&prov=&vil=&com=&quar=&av=&num=&note=&">Selectionnez</a></td>
+                    </tr>
+                }								
+	        </table>
+</body>
+</html>

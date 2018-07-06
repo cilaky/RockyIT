@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AffichageBaseImp</title>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+</head>
+<body id="AffichageBaseImp" onload="processus('AffichageBaseImp');">
+    
+        <div id="processus" style="position:absolute; top:180px; left:190px; width:400px;">
+            <h1 style="text-align:center;">PROCESSUS</h1>
+        </div>
+    
+         <a href="/TaxAssessment/SelectionArticle">Article</a>
+           <form method="post">
+              <fieldset>
+                 <legend>Base Imposable</legend>                                               
+                 <input type="submit" name="search" id="search" value="Nouvelle Base Imposable" class="bouton" />
+              </fieldset>
+             </form>
+                  <form>
+                        
+                        <table border="1">
+                            
+                            <tr>
+                                <th rowspan="2">N°</th>
+                                <th rowspan="2">Nature</th>
+                                <th colspan="5">Adresse</th>
+                                
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <th>Commune</th>
+                                <th>Quartier</th>
+                                <th>Avenue</th>
+                                <th>Numero</th>
+                            </tr>    
+                             <tr>
+                           
+
+                             </tr> 
+                        </table>
+                    </form>
+        
+    </div>
+</body>
+</html>

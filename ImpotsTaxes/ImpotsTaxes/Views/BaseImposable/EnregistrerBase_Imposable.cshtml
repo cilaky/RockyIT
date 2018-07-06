@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>        
+    <title>EnregistrerBase_Imposable</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+    
+</head>
+<body id="EnregistrerBaseImposable" onload="processus('EnregistrerBaseImposable','@Request.Params["action"]');">
+    
+    <div id="processus" style="position:absolute; top:70px; left:100px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+
+    <div id="saisieBase_Imposable" style="position:absolute; top:60px; left:950px; width:700px; background-color:aliceblue;">
+        <h2>BASE IMPOSABLE</h2>
+        <form method="post" action="/BaseImposable/EnregistrementBase_Imposable">
+            <fieldset>
+                <legend>SAISIR LES DONNEES DE LA MATIERE</legend>
+                <table>
+                    <tr>
+                        <td>Nature</td>
+                        <td><input type="text" name="nat" id="nat" class="txtStyle" value="@Request.Params["nat"]" readonly ="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>ID. du proprietaire</td>
+                        <td><input type="text" name="ass" id="ass" class="txtStyle" value="@Request.Params["ass"]" readonly ="true" /></td>
+                        <td><input type="text" name="feuil" hidden="hidden" class="txtStyle" value="@Request.Params["feuil"]" readonly ="true" /></td>
+
+                    </tr>
+                   
+                    <tr>
+                        <td>Province</td>
+                        <td><input type="text" name="prov" id="prov" class="txtStyle" value="@Request.Params["prov"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Ville</td>
+                        <td><input type="text" name="vil" id="vil" class="txtStyle"  value="@Request.Params["vil"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Commune</td>
+                        <td><input type="text" name="com" id="com" class="txtStyle" value="@Request.Params["com"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Quartier</td>
+                        <td><input type="text" name="quar" id="quar" class="txtStyle" value="@Request.Params["quar"]" readonly ="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Avenue</td>
+                        <td><input type="text" name="av" id="av" class="txtStyle" value="@Request.Params["av"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro</td>
+                        <td><input type="text" name="num" id="num" class="txtStyle"  required /></td>
+                    </tr>
+
+                    @*<tr>
+                        <td>ID. Recenseur</td>
+                        <td><input type="text" name="idrecens" id="idrecens" class="txtStyle" required /></td>
+                    </tr>*@
+
+                    <tr>
+                        <td>Mesure</td>
+                        <td><input type="text" name="mes" id="mes" class="txtStyle" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Unité de mesure</td>
+                        <td><input type="text" name="unite" id="unite" class="txtStyle" required/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Enseigne</td>
+                        <td><input type="text" name="enseign" id="enseign" class="txtStyle"  required /></td>
+                    </tr>
+                      @*<tr>
+                        <td>ID. User</td>
+                        <td><input type="text" name="idutil" id="idutil" value="@Session["utilisateur"]" class="txtStyle" required/></td>
+                    </tr>
+                     <tr>
+                        <td>ID. inspecteur</td>
+                        <td><input type="text" name="idutil" value="@Session["entity"]" class="txtStyle" required/></td>
+                    </tr>*@
+@*                    <tr>
+                        <td>Date d'enregistrement</td>
+                        <td><input type="text" name="dateenr" id="dateenr" class="txtStyle" required /></td>
+                    </tr>*@
+                    <tr>
+                        <td>Date de rensecement</td>
+                        <td><input type="text" id="date" name="dater" onclick="ds_sh(this);"/> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="save" id="save" value="Enregistrer" class="button" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+        @*<a href="/TaxAssessment/SelectionArticle?action=@Request.Params["action"]&feuil=@Request.Params["feuil"]&ass=@Request.Form["ass"]&nat=@Request.Form["nat"]&prov=@Request.Form["prov"]&vil=@Request.Form["vil"]&com=@Request.Form["com"]&quar=@Request.Form["quar"]&av=@Request.Form["av"]&num=@Request.Form["num"]&note=@Request.Params["note"]">Enregistrer</a>*@
+    </div>        
+</body>
+</html>

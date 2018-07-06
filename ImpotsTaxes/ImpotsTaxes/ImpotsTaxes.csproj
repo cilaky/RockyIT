@@ -95,9 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseImposableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RecouvrementController.cs" />
+    <Compile Include="Controllers\TaxAssessmentController.cs" />
+    <Compile Include="Controllers\TaxationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -292,6 +295,52 @@
     <Content Include="Views\Recouvrement\SelectVille.cshtml" />
     <Content Include="Views\Recouvrement\ServiceAssiette.cshtml" />
     <Content Include="Views\Recouvrement\VerifPaiement.cshtml" />
+    <Content Include="Views\BaseImposable\EnregistrementBase_Imposable.cshtml" />
+    <Content Include="Views\BaseImposable\EnregistrerBase_Imposable.cshtml" />
+    <Content Include="Views\BaseImposable\EnregistrerImpositionFeuille.cshtml" />
+    <Content Include="Views\BaseImposable\SelectAvenue.cshtml" />
+    <Content Include="Views\BaseImposable\SelectCommune.cshtml" />
+    <Content Include="Views\BaseImposable\SelectNature_base_imposable.cshtml" />
+    <Content Include="Views\BaseImposable\SelectProv.cshtml" />
+    <Content Include="Views\BaseImposable\SelectQuartier.cshtml" />
+    <Content Include="Views\BaseImposable\SelectVille.cshtml" />
+    <Content Include="Views\TaxAssessment\AffichageBaseImp.cshtml" />
+    <Content Include="Views\TaxAssessment\AffichageEdit.cshtml" />
+    <Content Include="Views\TaxAssessment\AffichageFeuilleCalcul.cshtml" />
+    <Content Include="Views\TaxAssessment\AffichageNote.cshtml" />
+    <Content Include="Views\TaxAssessment\AffichListeNote.cshtml" />
+    <Content Include="Views\TaxAssessment\AjoutBiensImpFeuille.cshtml" />
+    <Content Include="Views\TaxAssessment\ElaborFeuille.cshtml" />
+    <Content Include="Views\TaxAssessment\EnregistrerFeuille.cshtml" />
+    <Content Include="Views\TaxAssessment\EnvoyerMessage.cshtml" />
+    <Content Include="Views\TaxAssessment\EtablirNote.cshtml" />
+    <Content Include="Views\TaxAssessment\Feuille.cshtml" />
+    <Content Include="Views\TaxAssessment\Index.cshtml" />
+    <Content Include="Views\TaxAssessment\RechercherAgent.cshtml" />
+    <Content Include="Views\TaxAssessment\RechercherAssujetti.cshtml" />
+    <Content Include="Views\TaxAssessment\SaisieCoordonneesEntreprise.cshtml" />
+    <Content Include="Views\TaxAssessment\SaisirCoordonneesEntreprise.cshtml" />
+    <Content Include="Views\TaxAssessment\SearchTPbyName.cshtml" />
+    <Content Include="Views\TaxAssessment\SelectForme.cshtml" />
+    <Content Include="Views\TaxAssessment\SelectionArticle.cshtml" />
+    <Content Include="Views\TaxAssessment\SelectNote.cshtml" />
+    <Content Include="Views\Taxation\AffichageBaseImp.cshtml" />
+    <Content Include="Views\Taxation\AffichageEdit.cshtml" />
+    <Content Include="Views\Taxation\AffichageFeuilleCalcul.cshtml" />
+    <Content Include="Views\Taxation\AffichageNote.cshtml" />
+    <Content Include="Views\Taxation\AffichListeNote.cshtml" />
+    <Content Include="Views\Taxation\AjoutBiensImpFeuille.cshtml" />
+    <Content Include="Views\Taxation\ElaborFeuille.cshtml" />
+    <Content Include="Views\Taxation\EnregistrerFeuille.cshtml" />
+    <Content Include="Views\Taxation\EnvoyerMessage.cshtml" />
+    <Content Include="Views\Taxation\EtablirNote.cshtml" />
+    <Content Include="Views\Taxation\Feuille.cshtml" />
+    <Content Include="Views\Taxation\Index.cshtml" />
+    <Content Include="Views\Taxation\RechercherAgent.cshtml" />
+    <Content Include="Views\Taxation\RechercherAssujetti.cshtml" />
+    <Content Include="Views\Taxation\SearchTPbyName.cshtml" />
+    <Content Include="Views\Taxation\SelectionArticle.cshtml" />
+    <Content Include="Views\Taxation\SelectNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

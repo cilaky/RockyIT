@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>EnregistrerFeuille</title>
+</head>
+<body>
+     <h1>@ViewBag.Message</h1>
+    @{
+        string msg = Request.Params["msg"];
+        switch(msg)
+        {
+            case "Echec":
+            <div>
+                <a href="/TaxAssessment/ElaborFeuille?action=&feuil=@Request.Form["numfeuille"]&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">feuille de calcul Enregistrée</a>
+            </div>
+                break;
+             case "OK":
+            <div>
+                <a href="/TaxAssessment/RechercherAssujetti?action=&feuil=@Request.Params["feuill"]&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">feuille de calcul Enregistrée</a>
+            </div>
+            break;
+        }
+        <a href="/TaxAssessment/RechercherAssujetti?action=&feuil=@Request.Form["numfeuille"]&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">feuille de calcul Enregistrée</a>
+
+    }
+</body>
+</html>

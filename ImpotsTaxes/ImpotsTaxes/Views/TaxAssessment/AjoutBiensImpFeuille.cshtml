@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AjoutBiensImpFeuille</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+
+</head>
+<body id="AjoutBiensImpFeuille" onload="processus('AjoutBiensImpFeuille','@Request.Params["action"]');">
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR UNE FEUILLE DE CALCUL OU SAISIR UNE DECLARATION</h2>
+    </div> 
+
+    <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div> 
+    
+    <div id="AjoutBiens" style="position:absolute; top:60px; left:1050px; width:500px; background-color:aliceblue;">
+        <h3>AJOUT DE BIEN IMPOSABLE SUR LA FEUILLE</h3>
+        <a href="/TaxAssessment/AffichageFeuilleCalcul" class="button">Affichage de la feuille avec tous les elements taxés</a>
+        <form method="post" action="/BaseImposable/EnregistrerImpositionFeuille?action=&feuil=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=&art=">
+            <fieldset>
+                <legend>Saisissez le montant, la monnaie et l'observation</legend>
+                <table>
+                    <tr>
+                        <td>N° Feuille</td>
+                        <td><input type="text" id="numfeuille" name="numfeuille" value="@Request.Params["feuil"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>N° du dossier </td>
+                        <td><input type="text" id="id" name="id" value="@Request.Params["ass"]" readonly="true"/> </td>
+                    </tr>                    
+                    <tr>
+                        <td>Nature</td>
+                        <td><input type="text" id="nature" name="nature" value="@Request.Params["nat"]" readonly="true"/> </td>
+                    </tr>                    
+                    <tr>
+                        <td>Province</td>
+                        <td><input type="text" id="province" name="province" value="@Request.Params["prov"]" readonly="true"/> </td>
+                    </tr>
+                     <tr>
+                        <td>Ville</td>
+                        <td><input type="text" id="ville" name="ville" value="@Request.Params["vil"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Commune</td>
+                        <td><input type="text" id="commune" name="commune" value="@Request.Params["com"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Quartier</td>
+                        <td><input type="text" id="quartier" name="quartier" value="@Request.Params["quar"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Avenue</td>
+                        <td><input type="text" id="avenue" name="avenue" value="@Request.Params["av"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Numéro</td>
+                        <td><input type="text" id="number" name="number" value="@Request.Params["num"]" readonly="true"/> </td>
+                    </tr>                
+                    <tr>
+                        <td>Article</td>
+                        <td><input type="text" id="article" name="article" value="@Request.Params["art"]" readonly="true"/> </td>
+                    </tr>
+                     <tr>
+                        <td>Id Article</td>
+                        <td><input type="text" id="idart" name="idart" value="@Request.Params["idart"]" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Montant</td>
+                        <td><input type="text" id="montant" name="montant" required/> </td>
+                    </tr>
+                    <tr>
+                        <td>Monnaie</td>
+                        <td>
+                            <select name="monnaie" required>
+                                <option></option>
+                                <option>USD</option>
+                                <option>FC</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Observation</td>
+                        <td><input type="text" id="obs" name="obs" /> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Suivant" /></td>
+                    </tr>
+                </table>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

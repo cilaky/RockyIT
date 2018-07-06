@@ -1,0 +1,95 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+    Person pers=new Person();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SaisirCoordonneesEntreprise</title>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />
+</head>
+<body id="SaisirCoordonneesEntreprise" onload="processus('SaisirCoordonneesEntreprise','@Request.Params["action"]');">
+    <div>
+    <div id="processus" style="position:absolute; top:50px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+         <div id="Saisir_CoordonneesEntreprise" style="position:absolute; top:20px; left:950px; width:700px; background-color:aliceblue;">
+        
+        <form method="post" action="/TaxAssessment/SaisieCoordonneesEntreprise">
+            <fieldset>
+                <legend>SAISIR LES DONNEES DE LA PERSONNE MORALE</legend>
+                <table>
+                    <tr>
+                        <td>Id Personne</td>
+                        <td><input type="text" name="ass" id="ass" class="txtStyle" value="@pers.NewIDCompany()" readonly ="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail</td>
+                        <td><input type="text" name="email" id="email" class="txtStyle" value=""  required/></td>
+                    </tr>
+                   
+                    <tr>
+                        <td>Po-Box</td>
+                        <td><input type="text" name="pobox" id="pobox" class="txtStyle" value="" required/></td>
+                    </tr>
+                     <tr>
+                        <td>Province</td>
+                        <td><input type="text" name="prov" id="prov" class="txtStyle" value="" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Ville</td>
+                        <td><input type="text" name="vil" id="vil" class="txtStyle"  value="" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Commune</td>
+                        <td><input type="text" name="com" id="com" class="txtStyle" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Quartier</td>
+                        <td><input type="text" name="quar" id="quar" class="txtStyle" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Avenue</td>
+                        <td><input type="text" name="av" id="av" class="txtStyle"  required/></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro</td>
+                        <td><input type="text" name="num" id="num" class="txtStyle"  required /></td>
+                    </tr>
+                    <tr>
+                        <td>Raison sociale</td>
+                        <td><input type="text" name="rais" id="rais" class="txtStyle" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Initial</td>
+                        <td><input type="text" name="inial" id="inial" class="txtStyle" required/></td>
+                    </tr>
+
+                    <tr>
+                        <td>N° d'identification nationale</td>
+                        <td><input type="text" name="numid" id="numid" class="txtStyle"  required /></td>
+                    </tr>
+                    <tr>
+                        <td>N° DGI</td>
+                        <td><input type="text" id="numdgi" name="numdgi" required/> </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>N° Téléphone</td>
+                        <td><input type="text" id="numtel" name="numtel" required /> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="save" id="save" value="Enregistrer" class="button" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>        
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿
+@using ImpotsTaxes.Models
+@{        
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectionArticle</title>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+</head>
+<body id="SelectionArticle" onload="processus('SelectionArticle','@Request.Params["action"]');">
+    
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR UNE FEUILLE DE CALCUL OU SAISIR UNE DECLARATION</h2>
+    </div> 
+
+    <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>    
+    
+    <div id="AffichageBase" style="position:absolute; top:60px; left:950px; width:700px; background-color:aliceblue;">
+        <table border="1">  
+            <tr>
+                <th>Id  Article</th>
+                <th> Article </th>
+                <th>Fait Generateur</th>
+                <th>Periode</th>
+            </tr>
+                @{Liste lst = new Liste();}
+                @foreach (Liste recouvrement in lst.lstArticleBI())
+                {
+                <tr>
+                    <td>@recouvrement.tax_id</td>
+                    <td><a href="/TaxAssessment/AjoutBiensImpFeuille?action=@Request.Params["action"]&feuil=@Request.Params["feuil"]&ass=@Request.Params["ass"]&nat=@Request.Params["nat"]&prov=@Request.Params["prov"]&vil=@Request.Params["vil"]&com=@Request.Params["com"]&quar=@Request.Params["quar"]&av=@Request.Params["av"]&num=@Request.Params["num"]&note=&art=@recouvrement.tax_name&idart=@recouvrement.tax_id">@recouvrement.tax_name</a></td>
+                    <td>@recouvrement.generating_fact</td>
+                    <td>@recouvrement.periodicity</td>
+                                                                                        
+                </tr>
+                }
+        </table> 
+    </div>
+</body>
+</html>

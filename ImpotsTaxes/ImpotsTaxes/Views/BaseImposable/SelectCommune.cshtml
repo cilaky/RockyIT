@@ -1,0 +1,56 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectCommune</title>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+    <link rel="stylesheet" href="../../Content/styleTable.css"/>
+</head>
+<body id="Adresse" onload="processus('Adresse','@Request.Params["action"]');">
+
+      
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR UNE FEUILLE DE CALCUL OU SAISIR UNE DECLARATION</h2>
+    </div> 
+      
+    <div id="processus" style="position:absolute; top:160px; left:200px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+      
+    <div id="commune" style="position:absolute; top:60px; left:400px; width:500px; background-color:aliceblue;">
+        
+        <!-- Tableau qui contiend le calendrier ! -->
+        <table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
+            <tr>
+                <td id="ds_calclass"></td>
+            </tr>
+        </table>
+
+         <fieldset>  
+             <legend>
+                Sélectionner  la commune
+             </legend>       
+            <table>  
+                <tr>
+                    <th>N°</th>
+                    <th>Commune</th>
+                </tr>
+                
+                @{Liste commu = new Liste();}
+                @foreach (Adress com in commu.listCommune(Request.Params["vil"]))
+                {
+                    <tr >
+                        <td>@com.nbre</td>
+                        <td><a href="/BaseImposable/SelectQuartier?action=@Request.Params["action"]&feuil=@Request.Params["feuil"]&ass=@Request.Params["ass"]&nat=@Request.Params["nat"]&prov=@Request.Params["prov"]&vil=@Request.Params["vil"]&com=@com.commune&quar=&av=&num=&note=">@com.commune</a></td>
+                    </tr>
+                }	
+            </table>  
+        </fieldset>
+    </div>  
+</body>
+</html>

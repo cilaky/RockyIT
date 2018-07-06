@@ -1,0 +1,62 @@
+﻿@using ImpotsTaxes.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AffichageBaseImp</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/Taxation.js"></script>
+</head>
+<body id="AffichageBaseImp" onload="processus('AffichageBaseImp','@Request.Params["action"]');">
+   
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">ETABLIR UNE FEUILLE DE CALCUL OU SAISIR UNE DECLARATION</h2>
+    </div> 
+
+    <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>    
+    
+    <div id="AffichageBase" style="position:absolute; top:60px; left:950px; width:700px; background-color:aliceblue;">
+        <h2>BASE(S) IMPOSABLE(S) DE L'ASSUJETTI</h2>    
+         <fieldset>
+         <legend>Selectionnez la base imposable à jouter sur la feuille</legend>
+        <table border="1">                            
+                <tr>
+                    <th rowspan="2">N°</th>
+                    <th rowspan="2">Nature</th>
+                    <th colspan="5">Adresse</th>                                
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <th>Commune</th>
+                    <th>Quartier</th>
+                    <th>Avenue</th>
+                    <th>Numero</th>
+                </tr>
+                @{Liste lst = new Liste();}
+                @foreach (Person recouvrement in lst.lstBaseImposable(Request.Params["ass"]))
+                {
+                    <tr>
+                        <td>@recouvrement.Id_person</td>
+                        <td><a href="/TaxAssessment/SelectionArticle?action=AncienneBase&feuil=@Request.Params["feuil"]&ass=@Request.Params["ass"]&nat=@recouvrement.name_company&prov=@recouvrement.province&vil=@recouvrement.town_dist&com=@recouvrement.commune&quar=@recouvrement.quarter&av=@recouvrement.avenue&num=@recouvrement.number&note=">@recouvrement.name_company</a></td>
+                        <td>@recouvrement.town_dist</td>
+                        <td>@recouvrement.commune</td>
+                        <td>@recouvrement.quarter</td>
+                        <td>@recouvrement.avenue</td> 
+                        <td>@recouvrement.number</td>                                                            
+                    </tr>
+                }	 
+            </table> 
+            </fieldset>
+            @*<a href="/TaxAssessment/SelectionArticle?action=&feuil=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=" class="button">Article</a>*@      
+            <a href="/BaseImposable/SelectNature_base_imposable?action=NouvelleBase&feuil=@Request.Params["feuil"]&ass=@Request.Params["ass"]&nat=&prov=&vil=&com=&quar=&av=&num=&note=" class="button">Nouvelle Base Imposable</a>                                                                     
+    </div>
+</body>
+</html>

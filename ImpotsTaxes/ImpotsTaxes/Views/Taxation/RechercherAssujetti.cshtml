@@ -1,0 +1,72 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>RechercherAssujetti</title>
+</head>
+<body>
+    <h2>RECHERCHE DE L'ASSUJETTI</h2>
+
+        <form method="post">
+            <fieldset>
+                <legend>SAISIR LE NOM OU UNE PATIE DU NOM DE L'ASSUJETTI</legend>
+               
+                <label for="tpnumber" class="txtStyle">Nom ou partie du nom de l'Assujetti</label>
+                <input type="text" name="tpname" id="tpname" class="txtStyle" required />
+                <input type="submit" name="search" id="search" value="Envoyer" class="bouton" />
+            </fieldset>
+        </form>
+
+                  <form>
+                        
+                        <table border="1">
+                            
+                            <tr>
+                                <th rowspan="2">Numero dossier</th>
+                                <th rowspan="2">Nom ou Raison social</th>
+                                <th rowspan="2">Telephone</th>
+                                <th rowspan="2">E-mail</th>
+                                <th colspan="5">Adresse</th>
+                                
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <th>Commune</th>
+                                <th>Quartier</th>
+                                <th>Avenue</th>
+                                <th>Numero</th>
+                            </tr>    
+                             <tr>
+                           @* @for (int i = 0; i < dtt.Rows.Count; i++)
+                            {
+                                
+                       
+                              <td>@dtt.Rows[i]["id"].ToString()</td> *@                               
+                                @*<td><a href="/Vignette/listeVehicule?quit=@Request["quit"]&lieu=@Request["lieu"]&exerc=@Request["exerc"]&date=@Request["date"]&pers=@dtt.Rows[i]["formeJur"].ToString()&id=@dtt.Rows[i]["id"].ToString()">@dtt.Rows[i]["name_company_name"].ToString()</a></td>*@
+                               @* <td>@dtt.Rows[i]["telephone"].ToString()</td>
+                                <td>@dtt.Rows[i]["email"].ToString()</td>
+                                <td>@dtt.Rows[i]["town_dist"].ToString()</td>
+                                <td>@dtt.Rows[i]["commune"].ToString()</td>
+                                <td>@dtt.Rows[i]["quarter_sect"].ToString()</td>
+                                <td>@dtt.Rows[i]["avenue_loc"].ToString()</td>
+                                <td>@dtt.Rows[i]["number"].ToString()</td>                                          
+                                          
+                            }*@  
+
+                             </tr> 
+                        </table>
+
+                        <!--Nouvel Assujetti-->
+                        @*<a href="/Vignette/choixFormeJur?quit=@Request["quit"]&lieu=@Request["lieu"]&exerc=@Request["exerc"]&date=@Request["date"]&pers=&id=">Nouvel Assujetti</a>*@
+                    </form>
+              
+                
+    <div>
+         <a href="/TaxAssessment/AffichageBaseImp">BIENS IMPOSABLE</a>
+    </div>
+</body>
+</html>

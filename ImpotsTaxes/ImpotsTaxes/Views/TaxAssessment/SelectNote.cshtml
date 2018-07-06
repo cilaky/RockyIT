@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectNote</title>    
+    <link rel="stylesheet" type="text/css" href="../Content/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="../Content/bootstrap/js/jquery-3.2.1.slim.min.js"></script>
+	<script type="text/javascript" src="../Content/bootstrap/js/bootstrap.js"></script>
+     <link rel="stylesheet" type="text/css" href="../Content/designComposant.css" />
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="nav-header">
+					<ul class="nav navbar-nav">
+                        <li><a href="/TaxAssessment/assessment"><img src="../../Content/retour1.jpg" width="30px" height="30px"></a></li>
+                        @if (Session["user_group"] == "Taxateur")
+                        {
+						<li>
+						@*<a href="/TaxAssessment/SearchTPbyName?action=note-informatisee&article=@Request.Params["article"]"> <span class="glyphicon glyphicon-home"> Note Informatisée </span> </a>*@
+                            @*<a href="/TaxAssessment/NPInformatisee?action=note-informatisee&note=@ViewBag.idNote&ent=&entpc=&dttx=&ntdeb=&ntdebnum=&ass=&asspc=&art=@Request.Params["article"]&tref=&mttx=&mntx=&enlettx=&idtx=&taux=&precis=&nature=&ens=&idprop=&prov=&vil=&com=&quart=&av=&num=&dim=&unit=">  <span class="glyphicon glyphicon-home">Note Informatisée </span></a>*@
+
+                            <a href="/TaxAssessment/SearchTPbyName?action=note-informatisee&note=@ViewBag.idNote&ent=&entpc=&dttx=&ntdeb=&ntdebnum=&ass=&asspc=&art=@Request.Params["article"]&tref=&mttx=&mntx=&enlettx=&idtx=&taux=&precis=&nature=&ens=&idprop=&prov=&vil=&com=&quart=&av=&num=&dim=&unit=">  <span class="glyphicon glyphicon-home">Note Informatisée </span></a>
+						</li>
+                        }
+						<li>
+							@*<a href="/TaxAssessment/SearchTPbyName?action=note-manuelle&article=@Request.Params["article"]">  <span class="glyphicon glyphicon-book"></span>Note Manuelle</a>*@
+                            @*<a href="/TaxAssessment/NPManuelle?action=note-manuelle&note=&ent=&entpc=&dttx=&ntdeb=&ntdebnum=&ass=&asspc=&art=@Request.Params["article"]&tref=&mttx=&enlettx=&idtx=&taux=&precis=&nature=&ens=&idprop=&prov=&vil=&com=&quart=&av=&num=&dim=&unit=&dtord=&avis=&mtord=&enletord=&idord=">  <span class="glyphicon glyphicon-book"></span>Note Manuelle</a>*@
+                            <a href="/TaxAssessment/SearchTPbyName?action=note-manuelle&note=&ent=&entpc=&dttx=&ntdeb=&ntdebnum=&ass=&asspc=&art=@Request.Params["article"]&tref=&mttx=&enlettx=&idtx=&taux=&precis=&nature=&ens=&idprop=&prov=&vil=&com=&quart=&av=&num=&dim=&unit=&dtord=&avis=&mtord=&enletord=&idord=">  <span class="glyphicon glyphicon-book"></span>Note Manuelle</a>
+						</li>						
+
+					</ul>
+				</div>
+			</nav>
+    </div>
+</body>
+</html>
