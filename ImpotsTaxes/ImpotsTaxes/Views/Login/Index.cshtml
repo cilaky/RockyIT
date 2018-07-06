@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />
+</head>
+<body>    
+        <h1>RECOUVREMENT</h1>
+
+        <div id="login">
+                <form method="post">
+                    <fieldset>
+                        <legend class="controle">Log In</legend>
+                
+                        <table>
+                            <tr>
+                                <td>Numéro du dossier</td>
+                                <td><input type="text" name="pers_id" class="txtStyle" /></td>
+                            </tr>
+                            <tr>
+                                <td>ID de l'Entité</td>
+                                <td><input type="text" name="entite_ID" class="txtStyle" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" value="Se connecter" class="bouton" /></td>
+                            </tr>
+                    
+                        </table>
+                    </fieldset>
+                </form>
+
+        
+                @if (IsPost)
+                {
+                    Session["entity"] = "Direction Générale";
+                    Session["entity_ID"] = Request["entite_ID"];
+                    Session["utilisateur"] = Request["pers_id"];
+                    Session["user_group"] = "Receveur";
+                    Response.Redirect("/Recouvrement/Index");
+                    
+                }
+
+        <!--<a href="/Vignette/Index">Vignette</a>-->
+    </div>
+</body>
+</html>
