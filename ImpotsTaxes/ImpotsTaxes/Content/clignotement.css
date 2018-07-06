@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.blink_text
+{
+ /*font-size:30px;
+ color:#D8F781;
+ font-weight:bold;*/
+ animation: blink 2s infinite;	
+}
+@keyframes blink 
+{  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+}
