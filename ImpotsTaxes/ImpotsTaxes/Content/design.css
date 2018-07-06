@@ -1,0 +1,142 @@
+﻿body
+{
+max-width:1200px;
+margin:0 auto;
+/*background-color:#e9ecee;*/
+}
+
+h1
+{
+	border:1px solid black;
+	text-align:center;
+	width:700px;
+	margin:20px auto;
+	font-family:"Comic Sans MS",Arial,Times,sans-serif;
+	font-size:72px;
+	color:#b6a93f; 
+	height:120px;
+	padding:10px;
+	/*background-image:url("site/images/logokeman.png");*/
+	background-repeat:no-repeat;
+	background-color:#8fceff;
+}
+
+table
+{
+/*font-family:"Comic Sans MS",Arial,Times,sans-serif;
+font-size:16px;*/
+}
+
+#menu
+{
+	/*display:table-cell;*/
+	/*border:1px solid black;*/
+	float:left;
+	margin-right:20px;
+	/*background-color:#fce5c3;*/
+	margin-left:10px;
+}
+
+#menu h3
+{
+	text-align:center;
+	margin:5px 0 10px 0;
+}
+
+#contenu
+{
+	/*display:table-cell;*/
+	border:1px solid black;
+	overflow:auto;
+	background-color:#c4bebe;
+	min-width:160px;
+	margin-right:10px;
+    
+}
+
+#contenu h2
+{
+	margin:20px 0 10px 20px;
+}
+
+#pied_de_page
+{
+	/*text-align:center;
+	border:1px solid black;
+	text-align:center;
+	width:700px;*/
+	margin:20px auto;
+	font-family:"Comic Sans MS",Arial,Times,sans-serif;
+	/*font-size:72px;*/
+	color:#b6a93f;
+	/*height:120px;*/
+	padding:10px;
+}
+
+/*ZONE DE TEXTE*/
+.txtStyle
+{
+width:260px;
+font-size:20px;
+}
+
+/*ZONE DE TEXTE*/
+/*input[type*="text"],select 
+{
+    width:260px;
+    font-size:20px;
+}*/
+
+.txtCourt
+{
+width:80px;
+font-size:20px;
+}
+
+/*ZONE DE TEXTE DES PAGES DE SAISIE DES DONNEES*/
+.txtSaisie
+{
+width:400px;
+}
+
+/*BOUTON*/
+.bouton
+{
+width:150px;
+font-size:24px;
+cursor:pointer;
+background-color:lightsteelblue;
+border:dotted 2px green;
+border-radius:5px;
+}
+
+/*TITRE SUR LES FORMULAIRES DE SAISIE*/
+.titre
+{
+font-size:24px;
+color:black;
+font-weight:bold;
+text-decoration:underline;
+text-shadow:2px 2px 4px black;
+text-align:center;
+}
+
+.titreRapport
+{
+text-align:center;
+font-size:36px;
+font-weight:bold;
+}
+
+.filltext {
+    font-style:italic;
+    font-weight:bold;
+    /*text-decoration:underline;*/
+    color:blue;
+}
+
+.bgim {
+    background-image: url("NOTEPortrait.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;    
+}
