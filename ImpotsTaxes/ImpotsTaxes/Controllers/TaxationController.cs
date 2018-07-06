@@ -119,21 +119,18 @@ namespace ImpotsTaxes.Controllers
         //=======================================================================
         public ActionResult EnvoyerMessage()
         {
-
             return View();
         }
         //etablir la note
         //=======================================================================
         public ActionResult EtablirNote()
         {
-
             return View();
         }
         //Affichage  liste des note
         //========================
         public ActionResult AffichListeNote()
         {
-
             return View();
         }
         //Affichage   note

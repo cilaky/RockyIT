@@ -104,20 +104,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Adresse.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\BaseImposable.cs" />
     <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Models\Entite.cs" />
+    <Compile Include="Models\Liste.cs" />
     <Compile Include="Models\ListesMED.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Recovery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\calendrier.js" />
+    <Content Include="Content\camera.jpg" />
+    <Content Include="Content\classeur.jpg" />
     <Content Include="Content\clignotement.css" />
+    <Content Include="Content\design.css" />
+    <Content Include="Content\designCalendrier.css" />
     <Content Include="Content\designComposant.css" />
     <Content Include="Content\enteteDGRNK.jpg" />
+    <Content Include="Content\etablirFeuilleCal.js" />
     <Content Include="Content\etablirMED.js" />
     <Content Include="Content\etablirMED1.js" />
+    <Content Include="Content\extrait.jpg" />
+    <Content Include="Content\feuilleCalcul.jpg" />
+    <Content Include="Content\FonctionsNote.js" />
     <Content Include="Content\images\Accorder_paiement.jpg" />
     <Content Include="Content\images\Acquit.jpg" />
     <Content Include="Content\images\Acquit_liberatoire.jpg" />
@@ -185,8 +198,27 @@
     <Content Include="Content\images\saisie2.jpg" />
     <Content Include="Content\images\Suspension.jpg" />
     <Content Include="Content\images\taxateur.jpg" />
+    <Content Include="Content\imprimante.jpg" />
+    <Content Include="Content\locataires.jpg" />
+    <Content Include="Content\LogoFormulaire.JPG" />
+    <Content Include="Content\maisonLocation.jpg" />
+    <Content Include="Content\modification.jpg" />
+    <Content Include="Content\note.jpg" />
+    <Content Include="Content\NOTEPortrait.jpg" />
+    <Content Include="Content\popupStyle.css" />
+    <Content Include="Content\quittance.jpg" />
+    <Content Include="Content\Recover.css" />
+    <Content Include="Content\reseau.jpg" />
+    <Content Include="Content\reseau2.jpg" />
+    <Content Include="Content\retour1.jpg" />
+    <Content Include="Content\saisie.jpg" />
+    <Content Include="Content\saisie2.jpg" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\styleTable.css" />
+    <Content Include="Content\taxateur.jpg" />
+    <Content Include="Content\taxateur2.jpg" />
+    <Content Include="Content\Taxation.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
