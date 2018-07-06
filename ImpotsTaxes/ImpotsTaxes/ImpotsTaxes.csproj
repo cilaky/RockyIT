@@ -110,6 +110,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\clignotement.css" />
+    <Content Include="Content\designComposant.css" />
+    <Content Include="Content\enteteDGRNK.jpg" />
+    <Content Include="Content\etablirMED.js" />
+    <Content Include="Content\etablirMED1.js" />
+    <Content Include="Content\styleTable.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -197,6 +203,28 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Recouvrement\AssujettisMED.cshtml" />
+    <Content Include="Views\Recouvrement\Index.cshtml" />
+    <Content Include="Views\Recouvrement\LstnotesouffAss.cshtml" />
+    <Content Include="Views\Recouvrement\LstRechAssujetti.cshtml" />
+    <Content Include="Views\Recouvrement\MED.cshtml" />
+    <Content Include="Views\Recouvrement\ModeAffMED.cshtml" />
+    <Content Include="Views\Recouvrement\RechercheAssujetti.cshtml" />
+    <Content Include="Views\Recouvrement\RechercheNoteMED.cshtml" />
+    <Content Include="Views\Recouvrement\SaisirDate.cshtml" />
+    <Content Include="Views\Recouvrement\SaisirMontant.cshtml" />
+    <Content Include="Views\Recouvrement\SaisirNumNote.cshtml" />
+    <Content Include="Views\Recouvrement\SelectAntenne.cshtml" />
+    <Content Include="Views\Recouvrement\SelectArticle.cshtml" />
+    <Content Include="Views\Recouvrement\SelectAvenue.cshtml" />
+    <Content Include="Views\Recouvrement\SelectCommune.cshtml" />
+    <Content Include="Views\Recouvrement\SelectNatBase.cshtml" />
+    <Content Include="Views\Recouvrement\SelectProv.cshtml" />
+    <Content Include="Views\Recouvrement\SelectQuartier.cshtml" />
+    <Content Include="Views\Recouvrement\SelectVille.cshtml" />
+    <Content Include="Views\Recouvrement\ServiceAssiette.cshtml" />
+    <Content Include="Views\Recouvrement\VerifPaiement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

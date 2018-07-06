@@ -1,0 +1,23 @@
+﻿body {
+}
+
+table
+{
+    border-collapse:collapse;
+}
+td, th
+{
+    border:1px solid black;
+}
+th {
+    background-color:#2fb21d; 
+    /*font-size:1.6em;*/
+}
+td {
+    /*font-size:1.4em;*/
+}
+.titre {
+    background-color:#00ffff;
+    font-size:1.6em;
+}
+
