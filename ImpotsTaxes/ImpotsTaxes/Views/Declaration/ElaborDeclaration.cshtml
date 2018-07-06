@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ElaborDeclaration</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/EtablirDeclaration.js"></script>
+
+</head>
+<body id="ElaborDeclaration" onload="processus('ElaborDeclaration');">
+      
+    <div>
+        <h2 style="text-align:center;text-decoration:underline;">SAISIR UNE DECLARATION</h2>
+    </div> 
+
+    <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+      
+    <div id="declaration" style="position:absolute; top:60px; left:800px; width:500px; background-color:aliceblue;">
+        
+        <!-- Tableau qui contiend le calendrier ! -->
+        <table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;">
+            <tr>
+                <td id="ds_calclass"></td>
+            </tr>
+        </table>
+        
+     <!--<div style="width:40%;margin:auto;margin-top:5%;background-color:aliceblue">-->
+         <fieldset>  
+             <legend>
+                Numéro et Date de la déclaration
+             </legend>
+           
+            <form method="post" action="/Declaration/EnregistrerDeclaration">
+                
+                <table>  
+                    <tr>
+                        <td>N° Déclaration</td>
+                        <td><input type="text" id="numdeclaration" name="numdeclaration" value="@ViewBag.id" readonly="true"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td><input type="text" id="date" name="date" onclick="ds_sh(this);" required/> </td>
+                    </tr>
+                    <tr>
+                        <td>Exercice fiscal</td>
+                        <td><input type="text" id="exerciceFisc" name="exerciceFisc" required/> </td>
+                    </tr>                    
+                    
+
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Suivant" /></td>
+                    </tr>
+            
+                </table>  
+                       
+            </form>
+        </fieldset>
+    </div> 
+</body>
+</html>

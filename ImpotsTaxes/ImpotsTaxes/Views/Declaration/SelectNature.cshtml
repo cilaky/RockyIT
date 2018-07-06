@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SelectNature</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/EtablirDeclaration.js"></script>
+ </head>
+        
+ <body id="SelectNature" onload="processus('SelectNature','@Request.Params["action"]');">
+    <div>
+        <h1 style="text-align:center;text-decoration:underline;">PROCESSUS DE DECLARATION</h1>
+    </div>
+
+   <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+   </div>
+
+   <div id="rechDeclaration" style="position:absolute; top:60px; left:1030px; width:900px; background-color:aliceblue;">
+        <h2>Séléctionner la nature de la base imposable</h2>
+        <table border="1">
+	        <tr>
+                <th>N°</th>
+                <th>NATURE</th>
+                <th>SELECTION</th>
+            </tr>
+        </table>
+        <a href="/Declaration/SaisirElementsBaseImp?action=@Request.Params["action"]&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">Sélectionner</a>
+    </div>
+</body>
+</html>

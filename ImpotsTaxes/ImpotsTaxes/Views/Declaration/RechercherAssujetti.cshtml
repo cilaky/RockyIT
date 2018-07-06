@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>RechercherAssujetti</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/EtablirDeclaration.js"></script>
+</head>  
+<body id="RechercherAssujetti" onload="processus('RechercherAssujetti');">
+    <div>
+     <h1 style="text-align:center;text-decoration:underline;">PROCESSUS DE DECLARATION</h1>
+   </div>
+
+   <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+   </div>
+
+   <div id="rechDeclaration" style="position:absolute; top:60px; left:1030px; width:900px; background-color:aliceblue;">
+          <h2>RECHERCHE DE L'ASSUJETTI</h2>
+          <form method="post">
+                <fieldset>
+                    <legend>SAISIR LE NOM OU UNE PARTIE DU NOM DE L'ASSUJETTI</legend>
+               
+                    <label for="tpnumber" class="txtStyle">Nom ou partie du nom de l'Assujetti</label>
+                    <input type="text" name="tpname" id="tpname" class="txtStyle" required /> <br /><br />
+                    <input type="submit" name="search" id="search" value="Envoyer" class="button" />
+                </fieldset>
+            </form>
+            <table border="1">
+                            
+            <tr>
+                <th rowspan="2">Numero dossier</th>
+                <th rowspan="2">Nom ou Raison social</th>
+                <th rowspan="2">Telephone</th>
+                <th rowspan="2">E-mail</th>
+                <th colspan="5">Adresse</th>
+                                
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <th>Commune</th>
+                <th>Quartier</th>
+                <th>Avenue</th>
+                <th>Numero</th>
+            </tr> 
+            </table>
+            <a href="/Declaration/AffichagePropriete?action=&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=" >Selectionner</a> </br>
+           <a href="/Declaration/SelectForme?action=&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">Nouvel Assujetti</a>
+    </div>
+</body>
+</html>

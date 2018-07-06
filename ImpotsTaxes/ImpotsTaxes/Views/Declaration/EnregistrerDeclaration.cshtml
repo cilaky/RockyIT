@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>EnregistrerDeclaration</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+</head>
+<body>
+    <div>
+        @{ 
+            //string msg = ViewBag.Message;
+            if (ViewBag.Message == "Enregistrement réussi avec succès") 
+            {
+                <h2>@ViewBag.Message</h2>
+                <a href="/Declaration/RechercherAssujetti?action=@Request.Params["action"]&declaration=@Request.Form["numdeclaration"]&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=" class="bouton">OK</a>
+            }
+            else{
+                <h2 style="color:red;">@ViewBag.Message</h2>                
+                <span>Cliquez sur </span><a href="/Declaration/ElaborDeclaration?action=@Request.Params["action"]&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=" class="bouton">OK</a><span> pour ressaisir la déclaration</span>
+            }
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AffichagePropriete</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/EtablirDeclaration.js"></script>
+</head>
+<body id="AffichagePropriete" onload="processus('AffichagePropriete','@Request.Params["action"]');">
+    <div>
+        <h1 style="text-align:center;text-decoration:underline;">PROCESSUS DE DECLARATION</h1>
+    </div>
+
+   <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+    </div>
+
+   <div id="afficherPropriete" style="position:absolute; top:60px; left:1030px; width:900px; background-color:aliceblue;">
+        <h2>Sélectionner le bien ou base imposable</h2>
+        <a href="/Declaration/EnregistrerProprieteDec?action=AncienneBase&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">Sélectionner</a>        
+        <a href="/Declaration/SelectNature?action=NouvelleBase&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">Nouvel(le) bien ou base imposable</a>
+    </div>
+</body>
+</html>

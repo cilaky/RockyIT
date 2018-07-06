@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>EnregistrerProprieteDec</title>
+    <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />  
+    <link rel="stylesheet" href="../../Content/designCalendrier.css"/>
+    <script type="text/javascript" src="../../Content/calendrier.js"></script>
+    <script type="text/javascript" src="../../Content/EtablirDeclaration.js"></script>
+</head>
+<body id="EnregistrerProprieteDec" onload="processus('EnregistrerProprieteDec','@Request.Params["action"]');">
+   <div>
+     <h1 style="text-align:center;text-decoration:underline;">PROCESSUS DE DECLARATION</h1>
+   </div>
+
+   <div id="processus" style="position:absolute; top:70px; left:180px; width:400px;">
+        <h1 style="text-align:center;">PROCESSUS</h1>
+   </div>
+
+   <div id="enregistrerPropriete" style="position:absolute; top:60px; left:800px; width:500px; background-color:aliceblue;">
+        <h2>Ajouter la proprieté sur la déclaration</h2>
+       <form method="post" action="/Declaration/EnregistrerBaseImp">
+            <fieldset>
+                <legend>SAISIR LE NUMERO DE LA PARCELLE</legend>
+                <table>
+                    <tr>
+                        <td>Nature</td>
+                        <td><input type="text" name="nat" id="nat" class="txtStyle" value="@Request.Params["nat"]" readonly ="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>ID. du proprietaire</td>
+                        <td><input type="text" name="ass" id="ass" class="txtStyle" value="@Request.Params["ass"]" readonly ="true" /></td>
+                        <td><input type="hidden" name="declaration" class="txtStyle" value="@Request.Params["declaration"]" /></td>
+
+                    </tr>         
+                    <tr>
+                        <td>Province</td>
+                        <td><input type="text" name="prov" id="prov" class="txtStyle" value="@Request.Params["prov"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Ville</td>
+                        <td><input type="text" name="vil" id="vil" class="txtStyle"  value="@Request.Params["vil"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Commune</td>
+                        <td><input type="text" name="com" id="com" class="txtStyle" value="@Request.Params["com"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Quartier</td>
+                        <td><input type="text" name="quar" id="quar" class="txtStyle" value="@Request.Params["quar"]" readonly ="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Avenue</td>
+                        <td><input type="text" name="av" id="av" class="txtStyle" value="@Request.Params["av"]" readonly="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro</td>
+                        <td><input type="text" name="num" id="num" class="txtStyle"  required /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="save" id="save" value="Ajouter" class="button" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+        <a href="/Declaration/EnregistrerProprieteDeclare?action=@Request.Params["action"]&declaration=&ass=&nat=&prov=&vil=&com=&quar=&av=&num=&note=">AJOUTER/ENREGISTRE</a>
+    </div>
+</body>
+</html>
