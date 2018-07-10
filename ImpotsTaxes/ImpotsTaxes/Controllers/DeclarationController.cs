@@ -22,7 +22,7 @@ namespace ImpotsTaxes.Controllers
         //================================
         public ActionResult ElaborDeclaration()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             ViewBag.id = con.Show_Data("declare @str varchar(50); "+
                                        "set @str=(SELECT NewId()); "+
                                        "select idDeclaration from (select SUBSTRING(@str,10,9) as idDeclaration) t "+

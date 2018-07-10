@@ -25,7 +25,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<FiscalEntity> Entity()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("Select " +
                                             "entity_id, " +
                                             "initials, " +
@@ -68,7 +68,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<Person> Employee()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select worker.id, "+
                                             "physical_person.name + ' ' + physical_person.last_name  + ' ' + physical_person.nick_name as nom, "+
                                             "person.email, "+
@@ -99,7 +99,7 @@ namespace ImpotsTaxes.Models
         //======================================
         public List<Person> Persons(string name)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select " + 
                                             "person.id, "+             
                                             "name + ' ' + last_name + ' ' + nick_name as name_company_name, "+
@@ -167,7 +167,7 @@ namespace ImpotsTaxes.Models
         //==================        
         public List<Login> Roles()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select group_name from user_group order by group_name",
                                             "user_group");
             List<Login> lst = new List<Login>();
@@ -187,7 +187,7 @@ namespace ImpotsTaxes.Models
         //==========================        
         public List<Person> Employee_Functions()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT function_desc FROM worker_function order by function_desc",
                                             "worker_function");
             List<Person> lst = new List<Person>();
@@ -206,7 +206,7 @@ namespace ImpotsTaxes.Models
         //==========================        
         public List<Person> Employee_Grades()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select grade_id,grade_desc from worker_grade order by grade_id",
                                             "worker_grade");
             List<Person> lst = new List<Person>();
@@ -227,7 +227,7 @@ namespace ImpotsTaxes.Models
         public List<Assessment> ListAssessment(string query, string table)
         {
             List<Assessment> lstAssessment = new List<Assessment>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source(query, table);
             for (int i = 0; i < dtt.Rows.Count; i++)
             {
@@ -251,7 +251,7 @@ namespace ImpotsTaxes.Models
         public List<string> lstBank()
         {
             List<string> lst = new List<string>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT initials FROM  company where id in(select bank_id from bank)", "company");
             for (int i = 0; i < dtt.Rows.Count; i++)
             {
@@ -265,7 +265,7 @@ namespace ImpotsTaxes.Models
         public List<Person> Banks()
         {
             List<Person> lst = new List<Person>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT id,initials FROM  company where id in(select bank_id from bank)", "company");
             for (int i = 0; i < dtt.Rows.Count; i++)
             {
@@ -563,7 +563,7 @@ namespace ImpotsTaxes.Models
         //=================
         public List<Assessment> lstRecettesActe(string startDate,string endDate)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT "+  
 		                                        "tax.tax_id, "+
                                                 "tax.tax_name, "+   
@@ -600,7 +600,7 @@ namespace ImpotsTaxes.Models
         //=================
         public List<Assessment> lstRecettesMois(int annee)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select "+
                                                 "mois, "+
                                                 "nbremois, "+
@@ -651,7 +651,7 @@ namespace ImpotsTaxes.Models
         //=================
         public List<Assessment> lstRecettesServices(string startDate, string endDate)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT "+ 
                                                 "fiscal_entity.entity_id, "+
                                                 "fiscal_entity.entity_name, "+
@@ -688,7 +688,7 @@ namespace ImpotsTaxes.Models
         //=====================
         public List<Assessment> lstRecettesOrdonnancees(string entity,string startDate, string endDate)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT "+
                                                 "tax_assessment.assessment_id, "+ 
                                                 "assessment_validation.validation_date, "+ 
@@ -736,7 +736,7 @@ namespace ImpotsTaxes.Models
         //=====================
         public List<Recovery> lstRecettesEncaissees(string entity, string startDate, string endDate)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT tax_assessment.assessment_id " +
                 ",convert(varchar(10),tax_assessment.assessment_date,103) as DateNP " +
                 ",(CASE WHEN tax_payment.currency='FC' THEN tax_payment.amount ELSE 0 END) AS FC " +
@@ -789,7 +789,7 @@ namespace ImpotsTaxes.Models
         public List<Adress> listProvince()
         {
             List<Adress> lst = new List<Adress>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT prov from province", "province");
 
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -808,7 +808,7 @@ namespace ImpotsTaxes.Models
         public List<Adress> listTown(string province)
         {
             List<Adress> lst = new List<Adress>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT town_dist from town_district where prov='" + province.Replace("'","''") + "'", "town_district");
             
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -827,7 +827,7 @@ namespace ImpotsTaxes.Models
         public List<Adress> listCommune(string town)
         {
             List<Adress> lst = new List<Adress>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT commune from commune where town_dist='" + town.Replace("'", "''") + "'", "commune");
 
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -846,7 +846,7 @@ namespace ImpotsTaxes.Models
         public List<Adress> listQuarter(string commune)
         {
             List<Adress> lst = new List<Adress>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT quarter_sect from quarter_sector where commune='" + commune.Replace("'", "''") + "'", "quarter_sector");
 
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -865,7 +865,7 @@ namespace ImpotsTaxes.Models
         public List<Adress> listAvenue(string quarter)
         {
             List<Adress> lst = new List<Adress>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("SELECT prov,town_dist,commune,quarter_sect,avenue_loc from avenue_locality where quarter_sect='" + quarter.Replace("'", "''") + "'", "avenue_locality");
 
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -883,7 +883,7 @@ namespace ImpotsTaxes.Models
         //======================
         public List<Person> lstUtilisateur(string name)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select " +
                                             "person.id, " +
                                             "name + ' ' + last_name + ' ' + nick_name as name_company_name, " +
@@ -947,7 +947,7 @@ namespace ImpotsTaxes.Models
         public List<BaseImposable> listBase(string id)
         {
             List<BaseImposable> lst = new List<BaseImposable>();
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("select "+ 
                                             "id, "+
                                             "nature, "+
@@ -989,7 +989,7 @@ namespace ImpotsTaxes.Models
         //-----------------------------
         public List<string> ListTax()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             List<string> lstTax = new List<string>();
             DataTable dtt = con.Data_Source("select tax_id,tax_name,generating_fact,periodicity from tax", "tax");
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -1004,7 +1004,7 @@ namespace ImpotsTaxes.Models
         //===================
         public List<Tax> LstTaxRec()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             List<Tax> lstTax = new List<Tax>();
             DataTable dtt = con.Data_Source("select tax_id,tax_name,generating_fact,periodicity from tax", "tax");
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -1023,7 +1023,7 @@ namespace ImpotsTaxes.Models
         //-----------------------------
         public List<string> ListEntiteSecteur()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             List<string> lstEntiteSecteur = new List<string>();
             DataTable dtt = con.Data_Source("select entity_name from fiscal_entity", "fiscal_entity");
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -1038,7 +1038,7 @@ namespace ImpotsTaxes.Models
         //===================================
         public List<Person> lstAssujettiBaseImp(string assBI)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("EXEC AssujettiBaseImp @noms='" + assBI + "'", "AssujettiBaseImp");
 
             List<Person> lstAssjBImpo = new List<Person>();
@@ -1067,7 +1067,7 @@ namespace ImpotsTaxes.Models
 
         public List<Person> lstBaseImposable(string ass)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("EXEC BaseImposable @id='" + ass + "'", "BaseImposable");
 
             List<Person> lstBImpo = new List<Person>();
@@ -1095,7 +1095,7 @@ namespace ImpotsTaxes.Models
         //====================
         public List<Liste> lstTaxeNature(string nature, string id, string prov, string town_dist, string commune, string quarter_sect, string avenue_loc,string number, string id_feuille)
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("EXEC TaxNature @nature='" + nature + "',"+
                                             " @id='" + id + "',@prov='" + prov + "',"+
                                             "@town_dist='" + town_dist + "',"+
@@ -1127,7 +1127,7 @@ namespace ImpotsTaxes.Models
 
         public List<Liste> lstArticleBI()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             DataTable dtt = con.Data_Source("EXEC ArticleBaseImp ", "EXEC ArticleBaseImp");
 
             List<Liste> lstArtBI = new List<Liste>();

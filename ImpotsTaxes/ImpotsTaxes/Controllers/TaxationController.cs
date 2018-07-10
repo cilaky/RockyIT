@@ -26,7 +26,7 @@ namespace ImpotsTaxes.Controllers
         ////CHOOSE IF THE NOTE IS AUTOMATIC OR MANUEL
         //public ActionResult SelectNote()
         //{
-        //    DBConnection con = new DBConnection("C:\\connexion.xml");
+        //    DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
         //    string id_note = con.Show_Data("DECLARE @Random INT; DECLARE @Upper INT; DECLARE @Lower INT SET @Lower = 10000000 SET @Upper = 99999999 SELECT @Random = ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0) SELECT @Random as Number where convert(varchar(10),@Random) not in (select assessment_id from tax_assessment)", "Number");
         //    ViewBag.idNote = id_note;
         //    return View();
@@ -104,7 +104,7 @@ namespace ImpotsTaxes.Controllers
         ////========================
         //public void AjoutBIFeuille()
         //{
-        //    DBConnection con = new DBConnection("C:\\connexion.xml");
+        //    DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
         //    con.Execute_Query("INSERT INTO () values()");
            
         //}

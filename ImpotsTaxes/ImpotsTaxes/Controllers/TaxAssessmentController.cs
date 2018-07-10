@@ -36,7 +36,7 @@ namespace ImpotsTaxes.Controllers
         //========================
         public ActionResult ElaborFeuille()
         {
-            DBConnection con = new DBConnection("C:\\connexion.xml");
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
             ViewBag.id = con.Show_Data("select number from (select CONVERT(int,RAND() * 100000) as number) feuille where number not in (select id_feuille from Feuille_Calcul)", "number");
             return View();
         }
@@ -138,7 +138,7 @@ namespace ImpotsTaxes.Controllers
         ////========================
         //public void AjoutBIFeuille()
         //{
-        //    DBConnection con = new DBConnection("C:\\connexion.xml");
+        //    DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
         //    con.Execute_Query("INSERT INTO () values()");
 
         //}
