@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using SQLServerConnection;
 
 namespace ImpotsTaxes.Models
 {
@@ -44,7 +45,7 @@ namespace ImpotsTaxes.Models
         //========================================
         public void EnregisterDeclaration(Declaration decl)
         {
-            DBConnection cnx = new DBConnection();
+            DBConnection cnx = new DBConnection("C:\\connexion.xml");
             cnx.Execute_Query("Exec EnregisterDeclaration '" + decl.id_decl + "','" + decl.decl_dat + "', " +
                               "'" + decl.exerc_fisc + "'");
         }
@@ -53,7 +54,7 @@ namespace ImpotsTaxes.Models
         //==================================================
         public void EnregDeclar_Propriete(Declaration declPro)
         {
-            DBConnection cnx = new DBConnection();
+            DBConnection cnx = new DBConnection("C:\\connexion.xml");
             cnx.Execute_Query("Exec EnregDeclar_Propriete '" + declPro.nature + "','" + declPro.id + "','" + declPro.prov + "' " +
                               "'" + declPro.town_dist + "','" + declPro.commune + "','" + declPro.quarter_sect + "','" + declPro.avenue_loc + "', " +
                               "'" + declPro.number + "','" + declPro.montant + "','" + declPro.monnaie + "'");
@@ -77,7 +78,7 @@ namespace ImpotsTaxes.Models
 
         public List<Declaration> lstBaseImposable(string ass)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("EXEC BaseImposable @id='" + ass + "'", "BaseImposable");
 
             List<Declaration> lstBImpo = new List<Declaration>();
@@ -109,7 +110,7 @@ namespace ImpotsTaxes.Models
 
         public List<Declaration> lstArticleBI()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("EXEC ArticleBaseImp ", "EXEC ArticleBaseImp");
 
             List<Declaration> lstArtBI = new List<Declaration>();

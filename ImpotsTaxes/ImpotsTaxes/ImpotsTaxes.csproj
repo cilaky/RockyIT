@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SQLServerConnection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SQLServerConnection.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -109,7 +113,6 @@
     <Compile Include="Models\Adresse.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\BaseImposable.cs" />
-    <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Models\Declaration.cs" />
     <Compile Include="Models\Entite.cs" />
     <Compile Include="Models\Liste.cs" />

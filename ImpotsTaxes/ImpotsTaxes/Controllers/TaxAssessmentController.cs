@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ImpotsTaxes.Models;
+using SQLServerConnection;
 
 namespace ImpotsTaxes.Controllers
 {
@@ -35,7 +36,7 @@ namespace ImpotsTaxes.Controllers
         //========================
         public ActionResult ElaborFeuille()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             ViewBag.id = con.Show_Data("select number from (select CONVERT(int,RAND() * 100000) as number) feuille where number not in (select id_feuille from Feuille_Calcul)", "number");
             return View();
         }
@@ -137,7 +138,7 @@ namespace ImpotsTaxes.Controllers
         ////========================
         //public void AjoutBIFeuille()
         //{
-        //    DBConnection con = new DBConnection();
+        //    DBConnection con = new DBConnection("C:\\connexion.xml");
         //    con.Execute_Query("INSERT INTO () values()");
 
         //}

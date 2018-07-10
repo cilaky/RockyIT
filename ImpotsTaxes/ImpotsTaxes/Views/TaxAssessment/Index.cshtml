@@ -25,8 +25,99 @@
 </head>
 <body>
     <div>
-  
-       
+           @* //Etablir une feuille de calcul ou saisir une declaration
+            //=======================================================*@
+       <div id="obj_1_Rectangle" title="obj_1_ Rectangle " style="position: absolute; top: 100px; left: 395px; width: 200px; height: 160px; text-align:center;">
+            <a href="/TaxAssessment/ElaborFeuille">
+                <img src="../../Content/saisie.jpg" alt="image non disponible" width="110" height="73" /><br />
+                Etablir une feuille de calcul ou saisir une Declaration<br/>
+                Art 71,72,6,197
+            </a>
+        </div >
+             @*//Saisir les quittances pour la regularisation
+            //============================================*@
+        <div id="obj_2_Rectangle" title="obj_2_ Rectangle " style="position: absolute; top: 120px; left: 720px; width: 200px; height: 160px; text-align:center;">
+            <a href="">
+              <img src="../../Content/quittance.jpg" alt="image non disponible" width="94 " height="65" /><br />
+                Saisir les quittances pour la regularisation<br/>
+                  Art 80, 740, 235
+             </a>
+         </div>
+               @* //Saisir les elements imposables pour generer la note
+            //===================================================*@
+         <div id="obj_3_Rectangle" title="obj_3_ Rectangle " style="position: absolute; top: 460px; left: 850px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/saisie2.jpg" alt="image non disponible" width="96 " height="64" /><br />
+                Saisir les elements imposables<br/>ou pour la pré-imposition <br/>
+                  Art 200,201, 850, 580
+             </a>
+         </div>
+                @*//Capturer l'image des documents de taxation
+                //==========================================*@
+          <div id="obj_4_Rectangle" title="obj_4_ Rectangle " style="position: absolute; top: 60px; left: 900px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/camera.jpg" alt="image non disponible" width="90 " height="90" /><br />
+                Capturer l'image des documents qui  ont<br/>servi à la constatation et liquidation<br/>
+                 Art 63, 900, 220
+             </a>
+         </div>          
+                @*  //Generer une note de perception pour les feuilles de calcul
+                //==========================================================*@
+          <div id="obj_5_Rectangle" title="obj_5_ Rectangle " style="position: absolute; top: 280px; left: 860px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/note.jpg" alt="image non disponible" width="91 " height="100" /><br />
+                Saisir les notes de<br/>perception manuelles<br/>
+                  Art 73, 900, 445
+             </a>
+         </div>
+               @*//Imprimer la note à l'assujetti
+               //==============================*@
+          <div id="obj_6_Rectangle" title="obj_6_ Rectangle " style="position: absolute; top:  600px; left: 880px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/imprimante.jpg" alt="image non disponible" width="105 " height="70" /><br />
+                Imprimer la note<br/> à l'assujetti<br/>
+                  Art 73,75, 900, 720
+             </a>
+         </div>
+              @*//Extrait des droits constatés et liquidés
+              //========================================*@
+         <div id="obj_7_Rectangle" title="obj_7_ Rectangle " style="position: absolute; top:  740px; left: 870px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/extrait.jpg" alt="image non disponible" width="138 " height="60" /><br />
+                Afficher ou imprimer l'extrait<br/>des droits constatés et liquidés<br/>
+                  Art 60, 850, 850
+             </a>
+         </div>
+             @*//Corriger les elements de taxation
+            //=================================*@
+         <div id="obj_8_Rectangle" title="obj_8_ Rectangle " style="position: absolute; top:  715px; left:  690px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/modification.jpg" alt="image non disponible" width=" 106 " height="76" /><br />
+                Corriger la taxation <br/> selon l'avis motivé<br/>de l'ordonnateu<br/>
+                  Art 67, 700, 845
+             </a>
+         </div>
+               @*//Generer note des feuilles de calcul
+               //=================================*@
+          <div id="obj_9_Rectangle" title="obj_9_ Rectangle " style="position: absolute; top:   663px; left:  520px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/feuilleCalcul.jpg" alt="image non disponible" width=" 110 " height="88" /><br />
+                Générer une note pour <br/> les feuilles de calcul<br/>déjà établies ou les déclarations saisies <br/>
+                  Art 67, 560, 830
+             </a>
+         </div>
+
+        @*//Afficher la situation fiscale de l'assujetti
+        //============================================*@
+            <div id="obj_10_Rectangle" title="obj_10_ Rectangle " style="position: absolute; top:   720px; left:  340px; width: 200px; height: 160px; text-align:center;">
+             <a href="">
+              <img src="../../Content/classeur.jpg" alt="image non disponible" width=" 130 " height="97" /><br />
+                Afficher la situation <br/> fiscale de l'assujetti<br/>
+                  Art 67, 560, 830
+             </a>
+         </div>
+        
+
         <!--<h1>Page d'aceuil de l'Edit</h1>
         <a href="/TaxAssessment/ElaborFeuille">Agent concerné</a>-->
 
@@ -76,7 +167,7 @@
 
             //Etablir une feuille de calcul ou saisir une declaration
             //=======================================================
-            saisief = new Image();
+            /*saisief = new Image();
             saisief.onload = function () {
                 context.drawImage(saisief, 400, 100, 110, 73);
             }
@@ -87,7 +178,10 @@
             context.fillText("Etablir une feuille de calcul ou", 400, 185);
             context.fillText("saisir une Declaration", 400, 200);
             context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 71,72,6,197", 400, 220);
+            context.fillText("Art 71,72,6,197", 400, 220);*/
+
+            context.textAlign = "left";
+            context.font = "14px Arial";
 
             //Association Etablir une feuille de calcul ou saisir une declaration
             //===================================================================
@@ -97,17 +191,17 @@
 
             //Saisir les quittances pour la regularisation
             //============================================
-            quittance = new Image();
-            quittance.onload = function () {
-                context.drawImage(quittance, 750, 120, 94, 65);
-            }
-            quittance.src = '../../Content/quittance.jpg';
+            //quittance = new Image();
+            //quittance.onload = function () {
+            //    context.drawImage(quittance, 750, 120, 94, 65);
+            //}
+            //quittance.src = '../../Content/quittance.jpg';
             
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Saisir les quittances", 740, 195);
-            context.fillText("pour la regularisation", 740, 215);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 80", 740, 235);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Saisir les quittances", 740, 195);
+            //context.fillText("pour la regularisation", 740, 215);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 80", 740, 235);
 
             //Association les quittances pour la regularisation
             //=================================================
@@ -117,18 +211,18 @@
 
             //Saisir les elements imposables pour generer la note
             //===================================================
-            elmtImp = new Image();
-            elmtImp.onload = function () {
-                context.drawImage(elmtImp, 850, 460, 96, 64);
-            }
-            elmtImp.src = '../../Content/saisie2.jpg';
+            //elmtImp = new Image();
+            //elmtImp.onload = function () {
+            //    context.drawImage(elmtImp, 850, 460, 96, 64);
+            //}
+            //elmtImp.src = '../../Content/saisie2.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Saisir les elements imposables/", 850, 535);
-            context.fillText("taxables pour generer la note", 850, 550);
-            context.fillText("ou pour la pré-imposition", 850, 565);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 200,201", 850, 580);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Saisir les elements imposables/", 850, 535);
+            //context.fillText("taxables pour generer la note", 850, 550);
+            //context.fillText("ou pour la pré-imposition", 850, 565);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 200,201", 850, 580);
 
             //Association saisir les elements imposables pour generer la note
             //===============================================================
@@ -138,18 +232,18 @@
 
             //Capturer l'image des documents de taxation
             //==========================================
-            img = new Image();
-            img.onload = function () {
-                context.drawImage(img, 930, 60, 90, 90);
-            }
-            img.src = '../../Content/camera.jpg';
+            //img = new Image();
+            //img.onload = function () {
+            //    context.drawImage(img, 930, 60, 90, 90);
+            //}
+            //img.src = '../../Content/camera.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Capturer l'image des", 900, 160);
-            context.fillText("documents qui ont servi à la", 900, 180);
-            context.fillText("constatation et liquidation", 900, 200);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 63", 900, 220);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Capturer l'image des", 900, 160);
+            //context.fillText("documents qui ont servi à la", 900, 180);
+            //context.fillText("constatation et liquidation", 900, 200);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 63", 900, 220);
 
             //Relation d'extension entre capturer image et feuille de calcul 
             //===============================================================
@@ -170,19 +264,19 @@
             context.fillStyle = "rgb(0, 0, 0)";
             context.fillText("<<Etend>>", 610, 105);
 
-            //Generer une note de perception pour les feuilles de calcul
-            //==========================================================
-            note = new Image();
-            note.onload = function () {
-                context.drawImage(note, 900, 280, 91, 100);
-            }
-            note.src = '../../Content/note.jpg';
+            ////Generer une note de perception pour les feuilles de calcul
+            ////==========================================================
+            //note = new Image();
+            //note.onload = function () {
+            //    context.drawImage(note, 900, 280, 91, 100);
+            //}
+            //note.src = '../../Content/note.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Saisir les notes de", 900, 405);
-            context.fillText(" perception manuelles", 900, 425);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText(" Art 73", 900, 445);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Saisir les notes de", 900, 405);
+            //context.fillText(" perception manuelles", 900, 425);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText(" Art 73", 900, 445);
 
             //Association generer une note de perception pour les feuilles de calcul
             //======================================================================
@@ -279,19 +373,19 @@
             context.lineTo(840, 480);
             context.stroke();
 
-            //Imprimer la note à l'assujetti
-            //==============================
-            imprimer = new Image();
-            imprimer.onload = function () {
-                context.drawImage(imprimer, 900, 600, 105, 70);
-            }
-            imprimer.src = '../../Content/imprimante.jpg';
+            ////Imprimer la note à l'assujetti
+            ////==============================
+            //imprimer = new Image();
+            //imprimer.onload = function () {
+            //    context.drawImage(imprimer, 900, 600, 105, 70);
+            //}
+            //imprimer.src = '../../Content/imprimante.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Imprimer la note", 900, 680);
-            context.fillText("à l'assujetti", 900, 700);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 73,75", 900, 720);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Imprimer la note", 900, 680);
+            //context.fillText("à l'assujetti", 900, 700);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 73,75", 900, 720);
 
             //Association Imprimer la note à l'assujetti
             //==========================================
@@ -299,19 +393,19 @@
             context.lineTo(900, 650);
             context.stroke();
 
-            //Extrait des droits constatés et liquidés
-            //========================================
-            extrait = new Image();
-            extrait.onload = function () {
-                context.drawImage(extrait, 850, 740, 138, 60);
-            }
-            extrait.src = '../../Content/extrait.jpg';
+            ////Extrait des droits constatés et liquidés
+            ////========================================
+            //extrait = new Image();
+            //extrait.onload = function () {
+            //    context.drawImage(extrait, 850, 740, 138, 60);
+            //}
+            //extrait.src = '../../Content/extrait.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Afficher ou imprimer l'extrait", 850, 810);
-            context.fillText("des droits constatés et liquidés", 850, 830);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 60", 850, 850);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Afficher ou imprimer l'extrait", 850, 810);
+            //context.fillText("des droits constatés et liquidés", 850, 830);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 60", 850, 850);
 
             //Association Extrait des droits constatés et liquidés
             //====================================================
@@ -321,18 +415,18 @@
 
             //Corriger les elements de taxation
             //=================================
-            modif = new Image();
-            modif.onload = function () {
-                context.drawImage(modif, 720, 700, 106, 76);
-            }
-            modif.src = '../../Content/modification.jpg';
+            //modif = new Image();
+            //modif.onload = function () {
+            //    context.drawImage(modif, 720, 700, 106, 76);
+            //}
+            //modif.src = '../../Content/modification.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Corriger la taxation", 700, 785);
-            context.fillText("selon l'avis motivé", 700, 805);
-            context.fillText("de l'ordonnateur", 700, 825);
-            context.fillStyle = "rgb(9,224,96)";
-            context.fillText("Art 67", 700, 845);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Corriger la taxation", 700, 785);
+            //context.fillText("selon l'avis motivé", 700, 805);
+            //context.fillText("de l'ordonnateur", 700, 825);
+            //context.fillStyle = "rgb(9,224,96)";
+            //context.fillText("Art 67", 700, 845);
 
             //Association Corriger les elements de taxation
             //=============================================
@@ -340,21 +434,21 @@
             context.lineTo(760, 700);
             context.stroke();
 
-            //Generer note des feuilles de calcul
-            //=================================
-            feuille = new Image();
-            feuille.onload = function () {
-                context.drawImage(feuille, 560, 650, 110, 88);
-            }
-            feuille.src = '../../Content/feuilleCalcul.jpg';
+            ////Generer note des feuilles de calcul
+            ////=================================
+            //feuille = new Image();
+            //feuille.onload = function () {
+            //    context.drawImage(feuille, 560, 650, 110, 88);
+            //}
+            //feuille.src = '../../Content/feuilleCalcul.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Générer une note pour", 560, 750);
-            context.fillText("les feuilles de calcul", 560, 770);
-            context.fillText("déjà établies ou les", 560, 790);
-            context.fillText("déclarations saisies", 560, 810);
-            context.fillStyle = "rgb(9,224,96)";
-            //context.fillText("Art 67", 560, 830);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Générer une note pour", 560, 750);
+            //context.fillText("les feuilles de calcul", 560, 770);
+            //context.fillText("déjà établies ou les", 560, 790);
+            //context.fillText("déclarations saisies", 560, 810);
+            //context.fillStyle = "rgb(9,224,96)";
+            ////context.fillText("Art 67", 560, 830);
 
             //Association Generer note des feuilles de calcul
             //===============================================
@@ -362,19 +456,19 @@
             context.lineTo(610, 650);
             context.stroke();
 
-            //Afficher la situation fiscale de l'assujetti
-            //============================================
-            classeur = new Image();
-            classeur.onload = function () {
-                context.drawImage(classeur, 370, 720, 130, 97);
-            }
-            classeur.src = '../../Content/classeur.jpg';
+            ////Afficher la situation fiscale de l'assujetti
+            ////============================================
+            //classeur = new Image();
+            //classeur.onload = function () {
+            //    context.drawImage(classeur, 370, 720, 130, 97);
+            //}
+            //classeur.src = '../../Content/classeur.jpg';
 
-            context.fillStyle = "rgb(0, 0, 0)";
-            context.fillText("Afficher la situation", 370, 830);
-            context.fillText("fiscale de l'assujetti", 370, 850);
-            context.fillStyle = "rgb(9,224,96)";
-            //context.fillText("Art 67", 560, 830);
+            //context.fillStyle = "rgb(0, 0, 0)";
+            //context.fillText("Afficher la situation", 370, 830);
+            //context.fillText("fiscale de l'assujetti", 370, 850);
+            //context.fillStyle = "rgb(9,224,96)";
+            ////context.fillText("Art 67", 560, 830);
 
             //Association Afficher la situation fiscale de l'assujetti
             //========================================================

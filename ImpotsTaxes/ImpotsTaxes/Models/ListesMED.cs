@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using SQLServerConnection;
+
 
 namespace ImpotsTaxes.Models
 {
@@ -13,7 +15,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<Article> ListArticle()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select distinct tax.tax_id," +
                                             "tax_name," +
                                             "generating_fact," +
@@ -42,7 +44,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<Entite> ListQuartier(string commune)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select quarter_sect " +
                                             "from quarter_sector " +
                                             "where Commune='" + commune + "' " +
@@ -64,7 +66,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<Entite> ListAvenue(string quarter)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select avenue_loc " +
                                             "from avenue_locality " +
                                             "where quarter_sect='"+ quarter +"' " +
@@ -85,7 +87,7 @@ namespace ImpotsTaxes.Models
         //================
         public List<Entite> ListAntennes()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("SELECT DISTINCT Antenne.entity_Id  " +
                                             ",fiscal_entity.entity_name " +
                                             "FROM  dbo.person " +
@@ -124,7 +126,7 @@ namespace ImpotsTaxes.Models
         //==============
         public List<Adresse> ListProvince()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select prov " +
                                             "from province " +
                                             "where prov not like'-%' " +
@@ -145,7 +147,7 @@ namespace ImpotsTaxes.Models
         //===========
         public List<Adresse> ListVille(string province)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select town_dist " +
                                             "from town_district where prov='" + province + "' " +
                                             "order by town_dist", "town_district");
@@ -165,7 +167,7 @@ namespace ImpotsTaxes.Models
         //=============
         public List<Adresse> ListCommune(string ville)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select commune " +
                                             "from commune where town_dist='" + ville + "' " +
                                             "order by commune", "commune");
@@ -185,7 +187,7 @@ namespace ImpotsTaxes.Models
         //====================================================
         public List<Entite> ListServAss()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("SET DATEFORMAT dMy; " +
                                             "SELECT distinct entity_Id, entity_name " +
                                             "FROM " +
@@ -231,7 +233,7 @@ namespace ImpotsTaxes.Models
         *****************************************************************************************/
         public List<Recovery> ListeAssujettiMEDArticle(string utilisateur, int borneInf, int borneSup, string article)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDArt @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ", @Article='" + article + "'"
                         , "assessment_validation");
 
@@ -264,7 +266,7 @@ namespace ImpotsTaxes.Models
         //===================================================
         public List<Recovery> ListeAssujettiMEDAntenne(string utilisateur, int borneInf, int borneSup)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDAnt @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ""
                         , "assessment_validation");
 
@@ -297,7 +299,7 @@ namespace ImpotsTaxes.Models
         //=========================
         public List<Recovery> ListeAssujettiMEDDate(string utilisateur, int borneInf, int borneSup, DateTime Dated, DateTime Datef)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDDate @utilisateur='" + utilisateur + "',@borneInf='" + borneInf + "',@borneSup='" + borneSup + "', @datedeb='" + Dated + "',@datefin='" + Datef + "'"
                         , "assessment_validation");
 
@@ -330,7 +332,7 @@ namespace ImpotsTaxes.Models
         //=================================================================
         public List<Recovery> ListeAssujettiMEDMontant(string utilisateur, int borneInf, int borneSup, Double amount, string currency)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDMontant @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ", @mont=" + amount + ", @monn='" + currency + "'"
                         , "assessment_validation");
 
@@ -363,7 +365,7 @@ namespace ImpotsTaxes.Models
         //========================
         public List<Recovery> ListeAssujettiMEDCentre(string utilisateur, int borneInf, int borneSup)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDCentre @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ""
                         , "assessment_validation");
 
@@ -396,7 +398,7 @@ namespace ImpotsTaxes.Models
         //========================
         public List<Recovery> ListeAssujettiMEDServ(string utilisateur, int borneInf, int borneSup, string service)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDServ @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ", @serv='" + service + "'"
                         , "assessment_validation");
 
@@ -429,7 +431,7 @@ namespace ImpotsTaxes.Models
         //===================================================================================
         public List<Recovery> ListeAssujettiMEDCentreAntServ(string utilisateur, int borneInf, int borneSup)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec AssujettiMEDCentreAntServ @utilisateur='" + utilisateur + "',@borneInf=" + borneInf + ",@borneSup=" + borneSup + ""
                         , "assessment_validation");
 
@@ -462,7 +464,7 @@ namespace ImpotsTaxes.Models
         //========================
         public List<Recovery> RechercheAssujetti(string noms)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("select distinct id,NamePayer,telephone,email,town_dist,commune,quarter_sect,avenue_loc,number " +
                                                 "from (SELECT assessment_validation.assessment_id " +
                                                         ",tax.tax_id " +
@@ -521,7 +523,7 @@ namespace ImpotsTaxes.Models
         //==============================================
         public List<Recovery> ListeNoteSouffAssujetti(string id)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("select *from (SELECT assessment_validation.assessment_id " +
                                                 ",tax.tax_id " +
                                                 ",assessment_validation.amount " +
@@ -581,7 +583,7 @@ namespace ImpotsTaxes.Models
         //=====================
         public string VerifNote(string note, string utilisateur)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             return con.Show_Data("DECLARE @Message nvarchar(10) " +
                                 "IF " +
                                 "( " +
@@ -617,7 +619,7 @@ namespace ImpotsTaxes.Models
         //====================================================
         public string IDAssujettiNote(string note)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             return con.Show_Data("select taxpayer_id from tax_assessment where assessment_id='" + note + "'", "taxpayer_id");
         }
 
@@ -625,7 +627,7 @@ namespace ImpotsTaxes.Models
         //==================================================
         public string NomAssujetti(string id)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             return con.Show_Data("SELECT NameTaxPayer "+ 
                                     "from "+ 
                                     "( "+
@@ -640,7 +642,7 @@ namespace ImpotsTaxes.Models
         //========================
         public List<string> NumeroMED(string utilisateur)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec NumeroMED @userId='"+ utilisateur + "'", "t");
 
             List<string> numero = new List<string>();
@@ -655,7 +657,7 @@ namespace ImpotsTaxes.Models
         public void EnregistrerMED(string numeroOrd, string numeroMED, string numeroDossier, string utilisateur)
         {
             //exec EnregistrerMED @queue_number=3,@letter_number='3/MED/DR/DG/DGRNK/2018',@assujetti='4111012280',@userId='4444444444'
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             con.Execute_Query("exec EnregistrerMED @queue_number=" + numeroOrd + ",@letter_number='" + numeroMED + "',@assujetti='" + numeroDossier + "',@userId='" + utilisateur + "'");
         }
 
@@ -663,7 +665,7 @@ namespace ImpotsTaxes.Models
         //===========
         public List<Recovery> DetailMED(string numMED)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec DetailMED @numMED='" + numMED + "'"
                         , "MED");
 
@@ -696,7 +698,7 @@ namespace ImpotsTaxes.Models
         //=================
         public Recovery ElementMED(string numMED)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dttNote = con.Data_Source("exec ElementMED @numMED='" + numMED + "'"
                         , "procedure_letter");
 

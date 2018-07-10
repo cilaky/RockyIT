@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using SQLServerConnection;
 
 namespace ImpotsTaxes.Models
 {
@@ -60,14 +61,14 @@ namespace ImpotsTaxes.Models
         {
             //save in Address
             //==============================
-            DBConnection conadd = new DBConnection();
+            DBConnection conadd = new DBConnection("C:\\connexion.xml");
             
         }
        //save in Person
       //==============================
         public void Save_physical_person()
         {
-            DBConnection conn = new DBConnection();
+            DBConnection conn = new DBConnection("C:\\connexion.xml");
             /*conn.Execute_Query("INSERT into addres Values('" + province + "','" + town_dist + "','" + commune + "','" + quarter + "','" + avenue + "','" + number + "'," + rank + ")");
             conn.Execute_Query("INSERT INTO person  VALUES('" + Id_person + "','" + email + "','" + p_o_box + "','" + province + "','" + town_dist + "','" + commune  + "','" + quarter + "','" + avenue + "','" + number + "')");
             conn.Execute_Query("INSERT INTO telephone  VALUES('" + Id_person + "','" + telephone + "')");
@@ -86,7 +87,7 @@ namespace ImpotsTaxes.Models
 
         public void Save_physical_person(Person person)
         {
-            DBConnection conn = new DBConnection();
+            DBConnection conn = new DBConnection("C:\\connexion.xml");
             conn.Execute_Query("Begin TRANSACTION trans "+
                                 "BEGIN TRY "+
                                 "if ((select prov + ' ' + town_dist + ' ' + commune + ' ' + quarter_sect + ' ' + avenue_loc + ' ' + number from addres where prov + ' ' + town_dist + ' ' + commune + ' ' + quarter_sect + ' ' + avenue_loc + ' ' + number='" + province.Replace("'", "''") + " " + town_dist.Replace("'", "''") + " " + commune.Replace("'", "''") + " " + quarter.Replace("'", "''") + " " + avenue.Replace("'", "''") + " " + number + "') is null) "+
@@ -132,7 +133,7 @@ namespace ImpotsTaxes.Models
          //==============================
         public void save_company(Person person)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             /*con.Execute_Query("INSERT into addres Values('" + province + "','" + town_dist + "','" + commune + "','" + quarter + "','" + avenue + "','" + number + "'," + rank + ")");
             con.Execute_Query("INSERT INTO person  VALUES('" + Id_person + "','" + email + "','" + p_o_box + "','" + province + "','" + town_dist + "','" + commune + "','" + quarter + "','" + avenue + "','" + number + "')");
             con.Execute_Query("INSERT INTO company  VALUES('" + Id_person + "','" + name_company + "','" + initials + "','" + tax_num_dgi + "','" + numid_nat + "')");
@@ -182,7 +183,7 @@ namespace ImpotsTaxes.Models
 
         public void save_company()
         {
-            DBConnection con = new DBConnection();            
+            DBConnection con = new DBConnection("C:\\connexion.xml");            
             con.Execute_Query("Begin TRANSACTION trans BEGIN TRY if ((select prov + ' ' + town_dist + ' ' + commune + ' ' + quarter_sect + ' ' + avenue_loc + ' ' + number from addres where prov + ' ' + town_dist + ' ' + commune + ' ' + quarter_sect + ' ' + avenue_loc + ' ' + number='" + province.Replace("'", "''") + " " + town_dist.Replace("'", "''") + " " + commune.Replace("'", "''") + " " + quarter.Replace("'", "''") + " " + avenue.Replace("'", "''") + " " + number + "') is null) BEGIN INSERT into addres Values('" + province.Replace("'", "''") + "','" + town_dist.Replace("'", "''") + "','" + commune.Replace("'", "''") + "','" + quarter.Replace("'", "''") + "','" + avenue.Replace("'", "''") + "','" + number + "'," + rank + ") END IF @@TRANCOUNT>0 BEGIN SAVE TRANSACTION trans; END INSERT INTO person  VALUES('" + Id_person + "','" + email.Replace("'", "''") + "','" + p_o_box.Replace("'", "''") + "','" + province.Replace("'", "''") + "','" + town_dist.Replace("'", "''") + "','" + commune.Replace("'", "''") + "','" + quarter.Replace("'", "''") + "','" + avenue.Replace("'", "''") + "','" + number.Replace("'", "''") + "'); INSERT INTO telephone  VALUES('" + Id_person + "','" + telephone + "'); INSERT INTO company  VALUES('" + Id_person + "','" + name_company.Replace("'", "''") + "','" + initials.Replace("'", "''") + "','" + numid_nat + "','" + tax_num_dgi + "'); IF @@TRANCOUNT>0 BEGIN COMMIT TRANSACTION trans END END TRY BEGIN CATCH declare @msg varchar(250) set @msg=ERROR_MESSAGE()RAISERROR(@msg, 16, 1) IF @@TRANCOUNT>0 BEGIN ROLLBACK TRANSACTION trans END END CATCH");
         }
 
@@ -190,7 +191,7 @@ namespace ImpotsTaxes.Models
         //==============================
         public void Modify_person()
         {
-            DBConnection conn = new DBConnection();
+            DBConnection conn = new DBConnection("C:\\connexion.xml");
             conn.Execute_Query("INSERT INTO person  VALUES('" + Id_person + "','" + email + "','" + p_o_box + "','" + province + "','" + town_dist + "','" + commune + "','" + quarter + "','" + avenue + "','" + number + "')");
 
         }
@@ -199,14 +200,14 @@ namespace ImpotsTaxes.Models
         //==============================
         public void Modify_company()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             con.Execute_Query("INSERT INTO company  VALUES('" + Id_person + "','" + name_company + "','" + initials + "','" + tax_num_dgi + "','" + numid_nat + "')");
         }
         //modify in telephone
         //==============================
         public void Modify_telephone()
         {
-            DBConnection contel = new DBConnection();
+            DBConnection contel = new DBConnection("C:\\connexion.xml");
             contel.Execute_Query("INSERT INTO telephone  VALUES('" + Id_person + "','" + telephone + "')");
         }
 
@@ -214,13 +215,13 @@ namespace ImpotsTaxes.Models
         //==============================
         public void Modify_Person_physical()
         {
-            DBConnection connPP = new DBConnection();
+            DBConnection connPP = new DBConnection("C:\\connexion.xml");
             connPP.Execute_Query("INSERT INTO physical_person  VALUES('" + Id_person + "','" + name + "','" + last_name + "','" + nick_name + "')");
         }
 
         public string Modify_physical_person(Person person)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = new DataTable();
             dtt = con.Data_Source("BEGIN TRANSACTION; " +
                                 "BEGIN TRY " +
@@ -287,7 +288,7 @@ namespace ImpotsTaxes.Models
         //======================
         public string NewIDPP()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             return con.Show_Data("select idPers from (select '4111' + CONVERT(varchar(7),CONVERT(int,RAND()*1000000)) as idPers) as pers where idPers not in (select id from person)", "idPers");
         }
 
@@ -295,7 +296,7 @@ namespace ImpotsTaxes.Models
         //======================
         public string NewIDCompany()
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             return con.Show_Data("select idPers from (select '4112' + CONVERT(varchar(7),CONVERT(int,RAND()*1000000)) as idPers) as pers where idPers not in (select id from person)", "idPers");
         }
 
@@ -303,7 +304,7 @@ namespace ImpotsTaxes.Models
         //======
         public Person SearchById(string id)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = new DataTable();
             dtt = con.Data_Source("select person.id, "+ 
                                     "name + ' ' + last_name + ' ' + nick_name as name_company_name, "+
@@ -355,7 +356,7 @@ namespace ImpotsTaxes.Models
         //===================        
         public Person SearchEmployeeById(string id)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             DataTable dtt = con.Data_Source("select worker.id, " +
                                             "physical_person.name + ' ' + physical_person.last_name  + ' ' + physical_person.nick_name as nom, " +
                                             "person.email, " +
@@ -388,7 +389,7 @@ namespace ImpotsTaxes.Models
         //SAVE EMPLOYEE
         public void Save_Employee(Person employee)
         {
-            DBConnection con = new DBConnection();
+            DBConnection con = new DBConnection("C:\\connexion.xml");
             con.Execute_Query("INSERT INTO worker "+
                                 "("+
                                 "id,"+

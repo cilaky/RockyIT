@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data;
 using ImpotsTaxes.Models;
 
+
 namespace ImpotsTaxes.Controllers
 {
     public class BaseImposableController : Controller

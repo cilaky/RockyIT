@@ -17,7 +17,7 @@ namespace ImpotsTaxes.Controllers
             //Check session
             string value = Session["utilisateur"] as string;
             string group = Session["user_group"] as string;
-            //DBConnection con = new DBConnection();
+            //DBConnection con = new DBConnection("C:\\connexion.xml");
 
             if (String.IsNullOrEmpty(value))
             {
@@ -90,7 +90,7 @@ namespace ImpotsTaxes.Controllers
         {
             SessionVerification();
 
-            //DBConnection con = new DBConnection();
+            //DBConnection con = new DBConnection("C:\\connexion.xml");
             //ViewBag.message=con.Show_Data("exec EnregistrerMED @assujetti='" + Request.Params["ass"] + "',@userId='" + Session["utilisateur"] + "'", "Msg");
             //DataTable dtt = con.Data_Source("exec EnregistrerMED @assujetti='" + Request.Params["ass"] + "',@userId='" + Session["utilisateur"] + "'", "t");
             //ViewBag.lettre = dtt.Rows[0]["lettre"].ToString();
