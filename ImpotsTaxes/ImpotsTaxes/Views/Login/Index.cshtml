@@ -1,5 +1,12 @@
-﻿@*@{
-    Layout = null;
+﻿@using ImpotsTaxes.Models;
+@{
+    ViewBag.Title = "Index";
+
+    Session["utilisateur"] = "";
+    Session["user_group"] = "";
+    Session["entity"] = "";
+    
+    Login login=new Login();
 }
 
 <!DOCTYPE html>
@@ -10,754 +17,133 @@
     <link type="text/css" rel="stylesheet" href="../../Content/designComposant.css" />
 </head>
 <body>    
-        <h1>RECOUVREMENT</h1>
-
+    <!--LOGIN-->
+        <!--======-->
         <div id="login">
-                <form method="post">
-                    <fieldset>
-                        <legend class="controle">Log In</legend>
+        <form method="post" action="">
+            <fieldset>
+                <legend class="controle">Log In</legend>
                 
-                        <table>
-                            <tr>
-                                <td>Numéro du dossier</td>
-                                <td><input type="text" name="pers_id" class="txtStyle" /></td>
-                            </tr>
-                            <tr>
-                                <td>ID de l'Entité</td>
-                                <td><input type="text" name="entite_ID" class="txtStyle" /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" value="Se connecter" class="bouton" /></td>
-                            </tr>
+                <table>
+                    <tr>
+                        <td>Numéro du dossier</td>
+                        <td><input type="text" name="pers_id" class="txtStyle" /></td>
+                    </tr>
+                    <tr>
+                        <td>Mot de passe</td>
+                        <td><input type="password" name="pswd" class="txtStyle" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Se connecter" class="bouton" /></td>
+                    </tr>
                     
-                        </table>
-                    </fieldset>
-                </form>
+                </table>
+            </fieldset>
+        </form>
 
         
-                @if (IsPost)
-                {
-                    Session["entity"] = "Direction Générale";
-                    Session["entity_ID"] = Request["entite_ID"];
-                    Session["utilisateur"] = Request["pers_id"];
-                    Session["user_group"] = "Receveur";
-                    Response.Redirect("/Recouvrement/Index");
-                    
-                }
-
-        <!--<a href="/Vignette/Index">Vignette</a>-->
-    </div>
-</body>
-</html>
-*@
-
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Index</title>
-
-    <link rel="stylesheet" href="../../Content/design.css" />
-    <link type="text/css" rel="stylesheet" href="../../Content/clignotement.css" />
-</head>
-<body>
-
-    <h2 class="titre" style="text-align:center">PROCESSUS DE LA CHAINE DES RECETTES</h2>
-
-    <!--COntrole des sessions des agents qui ne sont pas represntés dans le processus de la chaine des recettes-->
-    <!--=======================================================================================================-->
-    <div style="text-align:right">
-        @switch (Session["user_group"] as string)
+        @if (IsPost)
         {
-            case "Banquier":
-                <a href="/paiement-note" class="blink_text" style="color:red; font-size:x-large;">Apureur</a>
-                break;
-            case "":
-                <a href="/Recensement/Adresse" class="blink_text" style="color:red; font-size:x-large;">Vérification des adresses</a>
-                break;
-            case "Repertoires":
-                <a href="/Repertory/TaxPayerRepertory?debut=1&fin=50" class="blink_text" style="color:red; font-size:x-large;">Gestion des repertoires</a>
-                break;
-            case "Saisie des activités":
-                <a href="/Recensement/Activite" class="blink_text" style="color:red; font-size:x-large;">Saisie des activités</a>
-                break;
-            case "Suivi du recensement":
-                <a href="/Recensement/Suivi" class="blink_text" style="color:red; font-size:x-large;">Suivi du recensement</a>
-                break;
-            case "Vignettes":
-                <a href="/Vignette/Index" class="blink_text" style="color:red; font-size:x-large;">Vente des Vignettes</a>
-                break;
-            case "OPS Finances":
-                <a href="/Comptabilite/SelectionBanque" class="blink_text" style="color:red; font-size:x-large;">OPS</a>
-                break;
-            case "CD Finances":
-                <a href="/Comptabilite/SituationGlobaleBques" class="blink_text" style="color:red; font-size:x-large;">CD Finances</a>
-                break;
-            case "DAF":
-                <a href="/Comptabilite/SituationGlobaleBques" class="blink_text" style="color:red; font-size:x-large;">Directeur des Finances</a>
-                break;
-            case "Administrateur":
-                <a href="/Administration/Index" class="blink_text" style="color:red; font-size:x-large;">Administrateur</a>
-                break;
-            case "Chef de Centre":
-                <a href="/CC/Index" class="blink_text" style="color:red; font-size:x-large;">Chef de Centre</a>
-                break;
-            case "DG":
-                <a href="/DG/Index" class="blink_text" style="color:red; font-size:x-large;">Directeur Général</a>
-                break;
+            
+            string nom = Request["pers_id"];
+            string pswd = Request["pswd"];
+            
+            try
+            {
+                if(login.CheckPswd(nom)=="1")
+                {
+                    Session["utilisateur"] = Request["pers_id"];
+                    Response.Redirect("/Login/ChangePSWD");
+                }
+                else
+                {
+                    Session["entity"] = login.UserEntity(Request["pers_id"]);
+                    Session["entity_ID"] = login.UserEntityID(Request["pers_id"]);                                                                   
+                    switch (login.Connect(nom, pswd))
+                    {
+                        case "Taxateur":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Taxateur";                                                           
+                            break;
+                        case "Ordonnateur":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Ordonnateur";                                    
+                            break;
+                        case "Receveur":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Receveur";                                   
+                            break;
+                        case "Banquier":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Banquier";                                   
+                            break;
+                        case "Vérification des adresses":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Vérification des adresses";
+                            break;
+                        case "Repertoires":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Repertoires";
+                            break;
+                        case "Saisie des activités":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Saisie des activités";
+                            break;
+                        case "Suivi du recensement":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Suivi du recensement";
+                            break;
+                        case "Vignettes":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Vignettes";
+                            break;
+                        case "OPS Finances":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "OPS Finances";
+                            break;
+                        case "CD Finances":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "CD Finances";
+                            break;
+                        case "DAF":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "DAF";
+                            break;
+                        case "Administrateur":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Administrateur";
+                            break;
+                        case "Chef de Centre":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Chef de Centre";
+                            break;
+                        case "DG":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "DG";
+                            break;
+                        case "Inspection":
+                            Session["utilisateur"] = Request["pers_id"];
+                            Session["user_group"] = "Inspection";
+                            break;   
+                        default:
+                            <p style="color:red;">Aucun utilisateur ne correspond au coordonnées saisies. Vérifier le numéro de dossier et le mot de passe!</p>
+                            break;
+                    }
+
+                    Response.Redirect("/Acceuil/Index");                    
+                }
+            }
+            catch (Exception ex)
+            {
+                <p style="color:red;">@ex.Message</p>
+            }
         }
         
-    </div>       
-
-    <div style="position: absolute; left: 10px; top: 70px;">
-        
-        <div id="obj_1_ligne" title="obj_1_ligne" style="position: absolute; left: 10px; top: 50px; width: 1640px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-        <div id="obj_2_ligne" title="obj_2_ligne" style="position: absolute; left: 10px; top: 80px; width: 1640px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-        <div id="obj_0_ligne" title="obj_0_ligne" style="position: absolute; left: 10px; top: 1550px; width: 1643px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-        <!--Ligne veriticale-->
-        <div id="obj_3_ligne" title="obj_3_ligne" style="position: absolute; left: 10px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div> 
-
-        <div id="obj_4_ligne" title="obj_4_ligne" style="position: absolute; left: 200px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div> 
-
-        <div id="obj_5_ligne" title="obj_5_ligne" style="position: absolute; left: 700px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-        
-        <div id="obj_6_ligne" title="obj_6_ligne" style="position: absolute; left: 450px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-         
-        <div id="obj_7_ligne" title="obj_7_ligne" style="position: absolute; left: 950px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-
-        <div id="obj_8_ligne" title="obj_8_ligne" style="position: absolute; left: 1200px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-
-        <div id="obj_9_ligne" title="obj_9_ligne" style="position: absolute; left: 1420px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-
-        <div id="obj_10_ligne" title="obj_10_ligne" style="position: absolute; left: 1650px; top: 50px; width: 3px; height: 1500px; background-color: rgb(0,0,0);"></div>
-        <!--texte Assujetti-->
-        <div id="obj_0_Text" title="obj_0_Text" style="position: absolute; top: 50px; left: 70px; color: rgb(0, 0, 0); font-size: 20px;  width: 100px; height: 20px;">ASSUJETTI</div>
-
-        <!--texte Taxation-->
-        <div id="obj_1_Text" title="obj_1_Text" style="position: absolute; top: 50px; left: 240px; color: rgb(0, 0, 0); font-size: 20px;  width: 200px; height: 20px;">
-            @if (Session["user_group"] as string == "Taxateur")
-            {
-                <a href="/Taxation/assessment" class="blink_text" style="color:red;">TAXATION</a>
-            }
-            else
-            {
-               <span>TAXATION</span> 
-            }
-
-        </div>
-
-        <!--texte Service d'assiette-->
-        <div id="obj_2_Text" title="obj_2_Text" style="position: absolute; top: 50px; left: 495px; color: rgb(0, 0, 0); font-size: 20px;  width: 300px; height: 20px;">
-            <!--SERVICE D'ASSIETTE-->
-            @if (Session["user_group"] as string == "Service_assiette")
-            {
-                <a href="#" class="blink_text" style="color:red;">SERVICE D'ASSIETTE</a>
-            }
-            else
-            {
-               <span>SERVICE D'ASSIETTE</span> 
-            }
-        </div>
+    </div>
     
-        <!--texte Ordonnancement-->
-        <div id="obj_3_Text" title="obj_3_Text" style="position: absolute; top: 50px; left: 705px; color: rgb(0, 0, 0); font-size: 20px;  width: 100px; height: 20px;">
-            
-            @if (Session["user_group"] as string == "Ordonnateur")
-            {
-                <a href="/notes-a-ordonnancer" class="blink_text" style="color:red;">ORDONNANCEMENT</a>
-            }
-            else
-            {
-               <span>ORDONNANCEMENT</span> 
-            }
-        </div>
-        
-        <!--texte Recouvrement-->
-        <div id="obj_4_Text" title="obj_4_Text" style="position: absolute; top: 50px; left: 1000px; color: rgb(0, 0, 0); font-size: 20px;  width: 100px; height: 20px;">
-            
-            @if (Session["user_group"] as string == "Receveur")
-            {
-                <a href="/Recouvrement/Index" class="blink_text" style="color:red;">RECOUVREMENT</a>
-            }
-            else
-            {
-               <span>RECOUVREMENT</span> 
-            }
-        </div>
-        
-        <!--texte Inspection-->
-        <div id="obj_5_Text" title="obj_5_Text" style="position: absolute; top: 50px; left: 1230px; color: rgb(0, 0, 0); font-size: 20px;  width: 100px; height: 20px;">
-            
-            @if (Session["user_group"] as string == "Inspection")
-            {
-                <a href="/Inspection" class="blink_text" style="color:red;">INSPECTION</a>
-            }
-            else
-            {
-               <span>INSPECTION</span> 
-            }
-        </div>
-        
-        <!--texte Comptabilité-->
-        <div id="obj_6_Text" title="obj_6_Text" style="position: absolute; top: 50px; left: 1420px; color: rgb(0, 0, 0); font-size: 20px;  width: 100px; height: 20px;">
-            COMPTABILITE
-            @if (Session["user_group"] as string == "")
-            {
-                <a href="" class="blink_text" style="color:red;"></a>
-            }
-            else
-            {
-               <span></span> 
-            }
-        </div>
-       
-         <!--rectangle por la declaration-->
-        <div id="obj_1_Rectangle" title="obj_1_ Rectangle " style="position: absolute; top: 90px; left: 30px; width: 140px; height: 120px; text-align:center;">
-            <img src="../../content/images/declaration.jpg" alt="image non disponible" width="79" height="102" />
-            Declaration
-
-        </div>
-
-        <!--rectangle pour etablissement de la note-->
-        <div id="obj_2_Rectangle" title="obj_2_ Rectangle " style="position: absolute; top: 250px; left: 180px; width: 180px; height: 50px; text-align:center;">
-            <img src="../../content/images/note.jpg" alt="image non disponible" width="90" height="102" /> <br/>
-            Completer la note de perception
-
-        </div>
-    
-        <!--rectangle pour etablissement de la note-->
-        <div id="obj_3_Rectangle" title="obj_3_ Rectangle " style="position: absolute; top: 90px; left: 480px; width: 200px; height: 50px;text-align:center;">
-            <a href="/Inspection"><img src="../../content/images/feuilleCalcul.jpg" alt="image non disponible" width="90" height="102" /></a> <br/>
-            Etablir la feuille de calcul
-
-        </div>
-    
-        <!--rectangle pour Ordonnancement de la note-->
-        <div id="obj_4_Rectangle" title="obj_4_ Rectangle " style="position: absolute; top: 270px; left: 718px; width: 200px; height: 50px; text-align:center;">
-            <img src="../../content/images/note.jpg" alt="image non disponible" width="90" height="102" /> <br/>
-            Ordonnancement de la note
-
-        </div>
-        
-        <!--rectangle pour Apurer la note-->
-        <div id="obj_5_Rectangle" title="obj_5_ Rectangle " style="position: absolute; top: 350px; left: 960px; width: 200px; height: 50px; text-align:center;">
-            <img src="../../content/images/Apurement.jpg" alt="image non disponible" width="90" height="102" /> <br/>
-            Apurement de la note
-
-        </div>
-   
-         <!--rectangle pour Etablir la feuille de calcul-->
-        <div id="obj_6_Rectangle" title="obj_6_ Rectangle " style="position: absolute; top: 100px; left: 1210px; width: 200px; height: 50px; text-align:center;">
-            <img src="../../content/images/feuilleCalcul.jpg" alt="image non disponible" width="90" height="102" /> <br/>
-            Etablir la feuille de calcul
-
-        </div>
-        
-          <!--rectangle pour Etablir la feuille de calcul
-        <div id="obj_7_Rectangle" title="obj_7_ Rectangle " style="position: absolute; top: 270px; left: 1430px; width: 200px; height: 50px; text-align:center;">
-            <img src="../../content/images/Comptabilisation.jpg" alt="image non disponible" width="90" height="102" /> <br/>
-            Comptabilisation
-
-        </div>-->
-
-          <!--ligne verticale de la declaration-->
-          <div id="obj_11_ligne" title="obj_11_ligne" style="position: absolute; left: 100px; top: 210px; width: 3px; height: 50px; background-color: rgb(0,0,0);"></div>
-       
-          <!--losange de la declaration-->
-          <div id="obj_1_lozange" title="obj_1_lozange" style="position:absolute; top: 258px; left: 87px; width:30px; height: 30px;">
-	      <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	      <div style="border-top:15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-         
-          </div>
-
-          <!--ligne horizontale droit de la declaration-->
-          <div id="obj_12_ligne" title="obj_12_ligne" style="position: absolute; left: 111px; top: 273px; width: 100px; height: 3px; background-color: rgb(0,0,0);text-align:center">Oui</div>
-
-          
-          <!--La flèche sur la ligne horizontale  de la declaration-->
-          <div id="obj_1_ fleche" title="obj_1_ fleche" style="position:absolute; top: 258px; left: 210px; width:20px; height: 10px;">
-	      <div style="border-left: 15px solid rgb(0,0,0); border-top: 15px solid transparent; border-bottom: 15px solid transparent;"></div>
-          </div>
-
-          <!--ligne horizontale gauche de la declaration-->
-          <div id="obj_13_ligne" title="obj_13_ligne" style="position: absolute; left: 50px; top: 272px; width: 40px; height: 3px; background-color: rgb(0,0,0);text-align:center">Non</div>
-
-          <!--ligne verticale relance-->
-          <div id="obj_14_ligne" title="obj_14_ligne" style="position: absolute; left: 50px; top: 275px; width: 3px; height: 385px; background-color: rgb(0,0,0);"></div>
-    
-           <!--ligne horizontale relance-->
-           <div id="obj_15_ligne" title="obj_15_ligne" style="position: absolute; left: 50px; top: 658px; width: 180px; height: 3px; background-color: rgb(0,0,0);"></div>
-          
-          <!--La flèche sur la ligne horizontale  de la relance-->
-          <div id="obj_2_ fleche" title="obj_2_ fleche" style="position:absolute; top: 650px; left: 230px; width:40px; height: 10px;">
-	      <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-          </div>
-
-          <!--rectangle pour Etablir la feuille de calcul-->
-          <div id="obj_8_Rectangle" title="obj_8_ Rectangle " style="position: absolute; top: 600px; left: 185px; width: 200px; height: 50px; text-align:center;">
-            <img src="../../content/images/Relance.jpg" alt="image non disponible" width="90" height="102"/><br/>
-            Relance
-
-        </div>
-
-        <!--ligne verticale Feuille service-->
-         
-          <div id="obj_16_ligne" title="obj_16_ligne" style="position: absolute; left: 530px; top: 212px; width: 3px; height: 48px; background-color: rgb(0,0,0);"></div> 
-
-           <!--ligne horizontale feuille service-->
-           <div id="obj_17_ligne" title="obj_17_ligne" style="position: absolute; left: 320px; top: 257px; width: 210px; height: 3px; background-color: rgb(0,0,0);"></div>
-          
-         <!--La flèche sur la ligne horizontale  Service-->
-
-         <div id="obj_3_ fleche" title="obj_3_ fleche" style="position:absolute; top: 247px; left: 274px; width:50px; height: 30px;">
-	     <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-         </div>
-
-         <!--ligne horizontale Ordonnancement-->
-         <div id="obj_18_ligne" title="obj_18_ligne" style="position: absolute; left: 315px; top: 335px; width: 450px; height: 3px; background-color: rgb(0,0,0);"></div>
-          
-         <!--La flèche sur la ligne horizontale  ORDO-->
-         <div id="obj_4_ fleche" title="obj_4_ fleche" style="position:absolute; top: 328px; left: 758px; width:40px; height: 10px;">
-	     <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-         </div>
-
-         <!--rectangle pour stocker les notes-->
-         <div id="obj_9_Rectangle" title="obj_9_ Rectangle " style="position: absolute; top: 90px; left: 180px; width: 180px; height: 50px; text-align:center;">
-         <img src="../../content/images/stocker_note.jpg" alt="image non disponible" width="90" height="102" /><br/>
-           Stock des notes
-
-         </div>
-        
-         <!--ligne verticale Feuille service-->
-         <div id="obj_19_ligne" title="obj_19_ligne" style="position: absolute; left: 267px; top: 210px; width: 3px; height: 30px; background-color: rgb(0,0,0);"></div> 
-
-         <!--La flèche sur la ligne Verticale  stock note-->
-         <div id="obj_5_ fleche" title="obj_5_ fleche" style="position:absolute; top: 240px; left: 258px; width:3px; height: 30px;">
-	     <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-         </div>
-
-         <!--losange Paiement-->
-         <div id="obj_2_lozange" title="obj_2_lozange" style="position:absolute; top: 450px; left: 100px; width:3px; height: 30px;">
-	     <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	     <div style="border-top:15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-         
-         </div>
-
-         <!--ligne verticale Paiement_ordo-->
-         <div id="obj_20_ligne" title="obj_20_ligne" style="position: absolute; left: 114px; top: 425px; width: 3px; height: 30px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne horizontale Ordonnancement_Paie-->
-         <div id="obj_23_ligne" title="obj_23_ligne" style="position: absolute; left: 114px; top: 425px; width: 680px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-         <!--ligne verticale ORDO-->
-         <div id="obj_26_ligne" title="obj_26_ligne" style="position: absolute; left: 793px; top: 392px; width: 3px; height: 36px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne horizontale Apurement_Paie-->
-         <div id="obj_24_ligne" title="obj_24_ligne" style="position: absolute; left: 128px; top: 464px; width: 860px; height: 3px; background-color: rgb(0,0,0);">Paiement dans 14Jrs</div>
-
-         <!--La flèche sur la ligne horizontale  d'apurement-->
-         <div id="obj_6_ fleche" title="obj_6_ fleche" style="position:absolute; top: 456px; left: 980px; width:860px; height: 3px;">
-	     <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-         </div>
-
-          <!----------MED------------->
-
-         <!--ligne verticale paiement_med-->
-         <div id="obj_21_ligne" title="obj_21_ligne" style="position: absolute; left: 114px; top: 470px; width: 3px; height: 110px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne horizontale MED_Paie-->
-         <div id="obj_25_ligne" title="obj_25_ligne" style="position: absolute; left: 114px; top: 580px; width: 850px; height: 3px; background-color: rgb(0,0,0);">Si non</div>
-
-          <!--La flèche sur la ligne horizontale  MED-->
-         <div id="obj_8_ fleche" title="obj_8_ fleche" style="position:absolute; top: 570px; left: 960px; width:30px; height: 3px;">
-	     <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-         </div>
-
-         <!--rectangle pour LA MED-->
-         <div id="obj_10_Rectangle" title="obj_10_ Rectangle " style="position: absolute; top: 550px; left: 970px; width: 30px; height: 3px; text-align:center;">
-         <img src="../../content/images/MED_1.jpg" alt="image non disponible" width="90" height="102"/><br/>
-          Mise_en_demeure
-
-         </div>
-
-                <!----------Inspection------------->
-         <!--ligne verticale Inspection1-->
-         <div id="obj_27_ligne" title="obj_27_ligne" style="position: absolute; left: 900px; top: 220px; width: 3px; height: 45px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne verticale Inspection2-->
-         <div id="obj_28_ligne" title="obj_28_ligne" style="position: absolute; left: 600px; top: 265px; width: 3px; height: 30px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne horizontale Inspection1-->
-         <div id="obj_29_ligne" title="obj_29_ligne" style="position: absolute; left: 320px; top: 295px; width: 283px; height: 3px; background-color: rgb(0,0,0);"></div>
-         
-         <!--La flèche sur la ligne horizontale  Inspection-->
-        
-         <div id="obj_7_ fleche" title="obj_7_ fleche" style="position:absolute; top: 287px; left: 310px; width:3px; height: 3px;">
-	     <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-         </div>
-
-         <!--ligne horizontale Inspection2-->
-         <div id="obj_30_ligne" title="obj_30_ligne" style="position: absolute; left: 600px; top: 264px; width: 303px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-          <!--ligne horizontale Inspection3-->
-         <div id="obj_31_ligne" title="obj_31_ligne" style="position: absolute; left: 900px; top: 220px; width: 330px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-         <!----------contrainte------------->
-        
-         <!--ligne verticale contrainte-->
-         <div id="obj_32_ligne" title="obj_32_ligne" style="position: absolute; left: 1080px; top: 670px; width: 3px; height: 220px; background-color: rgb(0,0,0);"></div> 
-
-         <!--La flèche sur la ligne Verticale  vers le bas contrainte--> 
-
-         <div id="obj_33_ fleche" title="obj_33_ fleche" style="position:absolute; top: 885px; left: 1072px; width:3px; height: 3px;">
-	     <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-         </div>
-
-         <!--rectangle pour la contrainte-->
-         <div id="obj_11_Rectangle" title="obj_11_ Rectangle " style="position: absolute; top: 895px; left: 1030px; width: 30px; height: 3px; text-align:center;">
-         <img src="../../content/images/Contrainte.jpg" alt="image non disponible" width="90" height="102"/><br/>
-           Contrainte
-
-         </div>
-        
-         
-        <!----------AMR------------->
-         <!--ligne verticale AMR-->
-         <div id="obj_34_ligne" title="obj_34_ligne" style="position: absolute; left: 1050px; top: 800px; width: 3px; height: 85px; background-color: rgb(0,0,0);"></div> 
-
-         <!--La flèche sur la ligne Verticale  vers le bas AMR--> 
-
-         <div id="obj_35_ fleche" title="obj_35_ fleche" style="position:absolute; top: 879px; left: 1043px; width:3px; height: 8px;">
-	     <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-         </div>
-
-         <!--rectangle pour l'AMR-->
-         <div id="obj_12_Rectangle" title="obj_12_ Rectangle " style="position: absolute; top: 709px; left: 990px; width: 3px; height: 3px; text-align:center;">
-         <img src="../../content/images/AMR_1.jpg" alt="image non disponible" width="90" height="102"/><br/>
-           AMR
-
-         </div>
-         <!----------Comptabilisation------------->
-
-        <!--rectangle pour Comptabilisation1-->
-        <div id="obj_13_Rectangle" title="obj_13_ Rectangle " style="position: absolute; top: 100px; left: 1430px; width: 200px; height: 50px; text-align:center;">
-        <img src="../../content/images/stock_note_bons.jpg" alt="image non disponible" width="90" height="102"/><br/>
-          Constituer le Stock de notes et des bons à payer
-       
-        </div>
-
-        <!--ligne verticale Comptabilisation1-->
-         <div id="obj_36_ligne" title="obj_36_ligne" style="position: absolute; left: 1540px; top: 240px; width: 3px; height: 40px; background-color: rgb(0,0,0);"></div> 
-
-         <!--La flèche sur la ligne Verticale  vers le bas Comptabilisation1--> 
-
-         <div id="obj_37_ fleche" title="obj_37_ fleche" style="position:absolute; top:280px; left: 1533px; width:3px; height: 8px;">
-	     <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-         </div>
-
-    
-          <!----------Comptabilisation------------->
-
-        <!--rectangle pour Comptabilisation2-->
-        <div id="obj_14_Rectangle" title="obj_14_ Rectangle " style="position: absolute; top: 292px; left: 1430px; width: 200px; height: 50px; text-align:center;">
-        <img src="../../content/images/Distribuer_note_bon.jpg" alt="image non disponible" width="90" height="102"/><br/>
-           Distribuer les notes et bons à payer
-       
-        </div>
-
-         <!--rectangle pour Comptabilisation3-->
-        <div id="obj_15_Rectangle" title="obj_14_ Rectangle " style="position: absolute; top: 450px; left: 1430px; width: 200px; height: 50px; text-align:center;">
-        <img src="../../content/images/Verification.jpg" alt="image non disponible" width="90" height="102"/><br/>
-           Vérification de la note
-       
-        </div>
-
-         <!--ligne verticale Comptabilisation3-->
-        <div id="obj_38_ligne" title="obj_38_ligne" style="position: absolute; left: 1540px; top: 570px; width: 3px; height: 40px; background-color: rgb(0,0,0);"></div> 
-
-         <!--La flèche sur la ligne Verticale  vers le bas Comptabilisation3--> 
-
-         <div id="obj_39_ fleche" title="obj_39_ fleche" style="position:absolute; top:600px; left: 1532px; width:3px; height: 8px;">
-	     <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-         </div>
-
-        <!--ligne horizontale Distribuer1-->
-        <div id="obj_44_ligne" title="obj_44_ligne" style="position: absolute; left: 370px; top: 250px; width: 550px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-
-        <!--ligne horizontale Distribuer2-->
-        <div id="obj_45_ligne" title="obj_45_ligne" style="position: absolute; left: 920px; top: 305px; width: 569px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-        <!--ligne verticale Distribuer1-->
-        <div id="obj_46_ligne" title="obj_46_ligne" style="position: absolute; left: 369px; top: 160px; width: 3px; height: 93px; background-color: rgb(0,0,0);"></div> 
-
-        <!--ligne verticale Distribuer2-->
-        <div id="obj_47_ligne" title="obj_47_ligne" style="position: absolute; left: 918px; top: 251px; width: 3px; height: 57px; background-color: rgb(0,0,0);"></div> 
-        
-        <!--ligne horizontale Distribuer3-->
-        <div id="obj_48_ligne" title="obj_48_ligne" style="position: absolute; left: 320px; top: 160px; width: 50px; height: 3px; background-color: rgb(0,0,0);"></div>
-         
-       <!--Flèche sur la ligne horizontale Distribuer3_Stock-->
-
-        <div id="obj_41_ fleche" title="obj_41_ fleche" style="position:absolute; top: 150px; left: 310px; width:3px; height: 3px;">
-	    <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-        </div>
-
-
-
-        <!--rectangle pour Comptabilisation3-->
-        <div id="obj_16_Rectangle" title="obj_16_ Rectangle " style="position: absolute; top: 610px; left: 1430px; width: 200px; height: 50px; text-align:center;">
-        <img src="../../content/images/Comptabilisation_note.jpg" alt="image non disponible" width="90" height="102"/><br/>
-           Comptabilisation de la recette
-       
-        </div>
-      
-         <!--ligne horizontale Apurement_Verification1-->
-        <div id="obj_49_ligne" title="obj_49_ligne" style="position: absolute; left: 1105px; top: 400px; width: 200px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-         <!--ligne verticale Apurement_Verification2-->
-        <div id="obj_50_ligne" title="obj_50_ligne" style="position: absolute; left: 1305px; top: 400px; width: 3px; height: 93px; background-color: rgb(0,0,0);"></div> 
-
-         <!--ligne horizontale Apurement_Verification3-->
-        <div id="obj_51_ligne" title="obj_51_ligne" style="position: absolute; left: 1307px; top: 490px; width: 170px; height: 3px; background-color: rgb(0,0,0);"></div>
-    
-        <!--Flèche sur la ligne horizontale Apurement_Verification4-->
-        <div id="obj_40_ fleche" title="obj_40_ fleche" style="position:absolute; top: 483px; left: 1470px; width:50px; height: 50px;">
-	    <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-       </div>
-
-        <!--Accuse reception de la relance-->
-
-       <!--rectangle pour Accuse de reception-->
-       <div id="obj_17_Rectangle" title="obj_17_ Rectangle " style="position: absolute; top: 680px; left: 80px; width: 3px; height: 3px; text-align:center;">
-       <img src="../../content/images/accuse_de_reception.jpg" alt="image non disponible" width="90" height="102"/><br/>
-          Accusé Relance
-       
-        </div>
-        <!--ligne verticale accusé1-->
-        <div id="obj_52_ligne" title="obj_52_ligne" style="position: absolute; left: 250px; top: 700px; width: 3px; height: 60px; background-color: rgb(0,0,0);"></div> 
-        
-        <!--ligne horizontale accusé1-->
-        <div id="obj_53_ligne" title="obj_53_ligne" style="position: absolute; left: 180px; top: 760px; width: 73px; height: 3px; background-color: rgb(0,0,0);"></div>
-         
-       <!--Flèche sur la ligne horizontale accusé1-->
-
-        <div id="obj_42_ fleche" title="obj_42_ fleche" style="position:absolute; top: 750px; left: 170px; width:3px; height: 3px;">
-	    <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-        </div>
-       
-        <!--ligne verticale Accusé_TO_1-->
-        <div id="obj_54_ligne" title="obj_54_ligne" style="position: absolute; left: 115px; top: 822px; width: 3px; height: 35px; background-color: rgb(0,0,0);"></div> 
-
-        <!--Losange Accusé_TO-->
-       <div id="obj_3_lozange" title="obj_3_lozange" style="position:absolute; top: 845px; left: 101px; width:5px; height: 5px;">
-	   <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	   <div style="border-top: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-       </div>
-        
-        <!--ligne horizontale Accusé_TO_2-->
-        <div id="obj_55_ligne" title="obj_55_ligne" style="position: absolute; left: 130px; top: 859px; width: 145px; height: 3px; background-color: rgb(0,0,0);">Non</div>
-         
-        <!--ligne horizontale Accusé_TO_3-->
-        <div id="obj_56_ligne" title="obj_56_ligne" style="position: absolute; left: 30px; top: 858px; width: 90px; height: 3px; background-color: rgb(0,0,0);">Déclarer</div>
-         
-         <!--Flèche sur la ligne horizontale accusé_TO-->
-
-       <div id="obj_43_ fleche" title="obj_43_ fleche" style="position:absolute; top: 150px; left: 50px; width:50px; height: 50px;">
-	   <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-       </div>
-    
-       <!--ligne verticale Accusé_TO_4-->
-        <div id="obj_57_ligne" title="obj_57_ligne" style="position: absolute; left: 30px; top: 160px; width: 3px; height: 700px; background-color: rgb(0,0,0);"></div> 
-        
-        <!--ligne horizontale Accusé_TO_5-->
-        <div id="obj_58_ligne" title="obj_58_ligne" style="position: absolute; left: 30px; top: 159px; width: 30px; height: 3px; background-color: rgb(0,0,0);"></div>
-         
-        <!--Flèche sur la ligne horizontale accusé1-->
-
-       <div id="obj_44_ fleche" title="obj_44_ fleche" style="position:absolute; top: 852px; left: 273px; width:50px; height: 50px;">
-	   <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-       </div>
-
-        <!--Taxation d'office-->
-
-       <!--rectangle pour la TO-->
-       <div id="obj_18_Rectangle" title="obj_18_ Rectangle " style="position: absolute; top: 790px; left: 290px; width: 3px; height: 3px; text-align:center;">
-       <img src="../../content/images/Taxation_office.jpg" alt="image non disponible" width="90" height="102"/><br/>
-          Taxation d'office
-       
-        </div>
-        <!--ligne verticale TO-->
-        <div id="obj_59_ligne" title="obj_59_ligne" style="position: absolute; left: 320px; top: 930px; width: 3px; height: 50px; background-color: rgb(0,0,0);"></div> 
-        
-        <!--ligne horizontale TO-->
-        <div id="obj_60_ligne" title="obj_60_ligne" style="position: absolute; left: 200px; top: 980px; width: 123px; height: 3px; background-color: rgb(0,0,0);"></div>
-         
-       <!--Flèche sur la ligne horizontale accusé1-->
-        <div id="obj_45_ fleche" title="obj_45_ fleche" style="position:absolute; top: 972px; left: 199px; width:3px; height: 3px;">
-	    <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-        </div>
-
-       <!--Accuse reception de la TO-->
-       <div id="obj_19_Rectangle" title="obj_19_ Rectangle " style="position: absolute; top: 950px; left: 100px; width: 3px; height: 3px; text-align:center;">
-       <img src="../../content/images/accuse_TO.jpg" alt="image non disponible" width="90" height="102"/><br/>
-        Accusé Taxation D'Office
-       </div>
-
-       <!--ligne horizontale Accusé_TO_AMR-->
-       <div id="obj_61_ligne" title="obj_61_ligne" style="position: absolute; left: 189px; top: 1000px; width: 680px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-       <!--ligne verticale Accusé_TO_AMR-->
-       <div id="obj_62_ligne" title="obj_62_ligne" style="position: absolute; left: 866px; top: 800px; width: 3px; height: 201px; background-color: rgb(0,0,0);"></div> 
-       
-      <!--ligne horizontale Accusé_TO_AMR2-->
-       <div id="obj_63_ligne" title="obj_63_ligne" style="position: absolute; left: 866px; top: 800px; width: 120px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-     <!--Flèche sur la ligne horizontale Accusé_TO_AMR3-->
-
-      <div id="obj_46_ fleche" title="obj_46_ fleche" style="position:absolute; top: 790px; left: 983px; width:50px; height: 50px;">
-	  <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-      </div>
-    
- 
-      <!--PAIEMENT-->
-
-      <!--ligne verticale Accusé_TO_AMR_Paiement-->
-      <div id="obj_64_ligne" title="obj_64_ligne" style="position: absolute; left: 115px; top: 1109px; width: 3px; height: 32px; background-color: rgb(0,0,0);"></div> 
-       
-      <!--Flèche sur la ligne verticale Accusé_TO_AMR_Paiement-->
-
-      <div id="obj_47_ fleche" title="obj_47_ fleche" style="position:absolute; top: 1140px; left: 107px; width:3px; height: 5px;">
-	  <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-      </div>
-
-      <!--ligne horizontale Accusé_TO_AMR_Paiement-->
-      <div id="obj_65_ligne" title="obj_65_ligne" style="position: absolute; left: 140px; top: 1162px; width: 930px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-       <!--Flèche sur la ligne horizontale Accusé_TO_AMR_Paiement-->
-
-      <div id="obj_48_ fleche" title="obj_48_ fleche" style="position:absolute; top: 1152px; left: 130px; width:3px; height: 3px;">
-	  <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-       </div>
-      
-     <!--ligne verticale Accusé_TO_AMR_Paiement-->
-     <div id="obj_66_ligne" title="obj_66_ligne" style="position: absolute; left: 1000px; top: 830px; width: 3px; height: 332px; background-color: rgb(0,0,0);"></div> 
-       
-     <!--ligne verticale Paiement_Contrainte-->
-     <div id="obj_67_ligne" title="obj_67_ligne" style="position: absolute; left: 1070px; top: 1015px; width: 3px; height: 150px; background-color: rgb(0,0,0);"></div> 
-      
-     <!--Losange paiement-->
-     <div id="obj_4_lozange" title="obj_4_lozange" style="position:absolute; top: 1148px; left: 101px; width:5px; height: 5px;">
-	 <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	 <div style="border-top: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-     </div>
-     <!--ligne verticale Paiement_BON_1-->
-     <div id="obj_68_ligne" title="obj_68_ligne" style="position: absolute; left: 115px; top: 1160px; width: 3px; height: 70px; background-color: rgb(0,0,0);"></div> 
-     
-     <!--ligne horizontale Paiement_BON_2-->
-     <div id="obj_69_ligne" title="obj_69_ligne" style="position: absolute; left: 118px; top: 1227px; width: 200px; height: 3px; background-color: rgb(0,0,0);">Paiement</div>
-
-     <!--Flèche sur la ligne horizontale Paiement-->
-
-     <div id="obj_49_ fleche" title="obj_49_ fleche" style="position:absolute; top: 1219px; left: 310px; width:50px; height: 50px;">
-	 <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-     </div>
-    
-     <!--Losange Paieemnt-->
-     <div id="obj_5_lozange" title="obj_5_lozange" style="position:absolute; top: 1215px; left: 320px; width:5px; height: 5px;">
-	 <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	 <div style="border-top: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-     </div>
-
-     <!--ligne horizontale Paiement_Note1-->
-     <div id="obj_70_ligne" title="obj_70_ligne" style="position: absolute; left: 340px; top: 1229px; width: 70px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-     <!--ligne verticale Paiement_NOTE2-->
-     <div id="obj_71_ligne" title="obj_71_ligne" style="position: absolute; left: 407px; top: 310px; width: 3px; height: 920px; background-color: rgb(0,0,0);"></div> 
-     
-    <!--ligne horizontale Paiement_Note3-->
-    <div id="obj_72_ligne" title="obj_72_ligne" style="position: absolute; left: 327px; top: 310px; width: 80px; height: 3px; background-color: rgb(0,0,0);"></div>
-
-     <!--Flèche sur la ligne horizontale Paiement_Note4-->
-
-     <div id="obj_50_ fleche" title="obj_50_ fleche" style="position:absolute; top: 302px; left: 317px; width:3px; height: 3px;">
-	 <div style="border-right: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-     </div>
-
-
-    
-     <!--Bon à payer-->
-
-     <!--ligne verticale Bon-->
-     <div id="obj_73_ligne" title="obj_73_ligne" style="position: absolute; left: 334px; top: 1242px; width: 3px; height: 50px; background-color: rgb(0,0,0);"></div> 
-     
-     <!--Flèche sur la ligne verticale bon-->
-
-     <div id="obj_51_ fleche" title="obj_51_ fleche" style="position:absolute; top: 1285px; left: 325px; width:3px; height: 3px;">
-	 <div style="border-top: 10px solid rgb(0,0,0); border-left: 10px solid transparent; border-right: 10px solid transparent;"></div>
-     </div>
-
-     <!--BAP-->
-     <div id="obj_20_Rectangle" title="obj_20_ Rectangle " style="position: absolute; top: 1295px; left: 320px; width: 3px; height: 3px; text-align:center;">
-     <img src="../../content/images/BAP.jpg" alt="image non disponible" width="90" height="102"/><br/>
-      Bon_à_payer
-     </div>
-
-
-     <!--Losange Paieemnt_bon-->
-     <div id="obj_6_lozange" title="obj_6_lozange" style="position:absolute; top: 1420px; left: 111px; width:5px; height: 5px;">
-	 <div style="border-bottom: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-	 <div style="border-top: 15px solid rgb(0,0,0); border-left: 15px solid transparent; border-right: 15px solid transparent;"></div>
-     </div>
-
-     <!--ligne horizontale Paiement_Bon-->
-     <div id="obj_74_ligne" title="obj_74_ligne" style="position: absolute; left: 127px; top: 1340px; width: 194px; height: 3px; background-color: rgb(0,0,0);">Paiement</div>
-
-      <!--ligne verticale Bon-->
-     <div id="obj_75_ligne" title="obj_75_ligne" style="position: absolute; left: 125px; top: 1340px; width: 3px; height: 90px; background-color: rgb(0,0,0);"></div> 
-
-     <!--ligne horizontale Paiement_Bon_apurement-->
-     <div id="obj_76_ligne" title="obj_76_ligne" style="position: absolute; left: 138px; top: 1433px; width: 762px; height: 3px; background-color: rgb(0,0,0);">Paiement</div>
-
-     <!--ligne verticale Paiement_Bon_apurement-->
-     <div id="obj_77_ligne" title="obj_77_ligne" style="position: absolute; left: 900px; top: 420px; width: 3px; height: 1016px; background-color: rgb(0,0,0);"></div> 
-
-     <!--ligne horizontale Paiement_Bon_apurement-->
-     <div id="obj_78_ligne" title="obj_78_ligne" style="position: absolute; left: 900px; top: 420px; width: 108px; height: 3px; background-color: rgb(0,0,0);"></div>
-    
-      <!--Flèche sur la ligne horizontale Paiement_Bon_Apurement-->
-
-       <div id="obj_52_ fleche" title="obj_52_ fleche" style="position:absolute; top: 411px; left: 1006px; width:50px; height: 50px;">
-	  <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-      </div>
-    
-     <!--ligne verticale Paiement_Bon_MED-->
-     <div id="obj_79_ligne" title="obj_79_ligne" style="position: absolute; left: 124px; top: 1448px; width: 3px; height: 50px; background-color: rgb(0,0,0);"></div> 
-    
-     <!--ligne horizontale Paiement_Bon_MED-->
-     <div id="obj_80_ligne" title="obj_80_ligne" style="position: absolute; left: 124px; top: 1496px; width: 702px; height: 3px; background-color: rgb(0,0,0);">Non</div>
-
-     <!--ligne verticale Paiement_Bon_MED-->
-     <div id="obj_81_ligne" title="obj_81_ligne" style="position: absolute; left: 823px; top: 610px; width: 3px; height: 888px; background-color: rgb(0,0,0);"></div> 
-
-     <!--ligne horizontale Paiement_Bon_MED-->
-     <div id="obj_82_ligne" title="obj_82_ligne" style="position: absolute; left: 826px; top: 610px; width: 135px; height: 3px; background-color: rgb(0,0,0);"></div>
-    
-      <!--Flèche sur la ligne horizontale Paiement_Bon_MED-->
-
-      <div id="obj_53_ fleche" title="obj_53_ fleche" style="position:absolute; top: 600px; left: 960px; width:50px; height: 50px;">
-	  <div style="border-left: 10px solid rgb(0,0,0); border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-      </div>
-
-     </div>   
 </body>
 </html>
+
+
+

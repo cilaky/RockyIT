@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AcceuilController.cs" />
     <Compile Include="Controllers\BaseImposableController.cs" />
     <Compile Include="Controllers\DeclarationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Models\Entite.cs" />
     <Compile Include="Models\Liste.cs" />
     <Compile Include="Models\ListesMED.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Recovery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -394,6 +396,7 @@
     <Content Include="Views\Declaration\SaisirElementsBaseImp.cshtml" />
     <Content Include="Views\Declaration\SelectForme.cshtml" />
     <Content Include="Views\Declaration\SelectNature.cshtml" />
+    <Content Include="Views\Acceuil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

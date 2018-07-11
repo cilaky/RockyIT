@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "SearchTPbyName";
 
-    DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+    DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
 
     string article = Request["article"];
 }

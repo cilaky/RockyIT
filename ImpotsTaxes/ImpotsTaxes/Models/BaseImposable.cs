@@ -67,7 +67,7 @@ namespace ImpotsTaxes.Models
         //==========================================
         public void EnregistrerNatureActivite(BaseImposable act)
         {
-            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             con.Execute_Query("INSERT INTO nature_base_imposable (nature,id_user,saving_date) values ('" + act.nature.Replace("'", "''") + "','" + act.id_user + "',getdate())");
         }
 
@@ -75,7 +75,7 @@ namespace ImpotsTaxes.Models
         //===================================
         public void EnregistrerActivite(BaseImposable act)
         {
-            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             con.Execute_Query(" SET DATEFORMAT DMY Exec EnregistrerBaseImposable  @nat='" + act.nature.Replace("'", "''") + "',@ass='" + act.id + "',@prov='" + act.prov.Replace("'", "''") + "',@vill='" + act.town_dist.Replace("'", "''") + "',@com='" + act.commune.Replace("'", "''") + "',@quart='" + act.quarter_sect.Replace("'", "''") + "',@aven='" + act.avenue_loc.Replace("'", "''") + "',@idinsp='" + act.inspector_id + "',@num='" + act.number + "',@mes=" + act.sizeAct + ",@unit='" + act.unity + "',@enseig='" + act.signboard + "',@datesav='"+ DateTime.Now +"',@iduser='" + act.id_user + "',@datrec='" + act.datecensus + "'"); 
         }
 
@@ -83,7 +83,7 @@ namespace ImpotsTaxes.Models
         //=========================
         public void EnregistrerTaxe(BaseImposable tx)
         {
-            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             con.Execute_Query("INSERT INTO tax ( " +
                 "(" +
                 "tax_id, " +
@@ -104,7 +104,7 @@ namespace ImpotsTaxes.Models
         //=============================
         public void Enregistrer_Taxe_due(BaseImposable tx)
         {
-            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             con.Execute_Query("INSERT INTO taxe_due " +
                 "(" +
                 "nature, " +
@@ -142,7 +142,7 @@ namespace ImpotsTaxes.Models
         =================================*/
         public void EnregistrerFeuille_Calcul(BaseImposable feuille)
         {
-            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection con = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             con.Execute_Query("SET DATEFORMAT DMY INSERT INTO Feuille_Calcul " +
                 "(" +
                 "id_feuille, " +
@@ -161,7 +161,7 @@ namespace ImpotsTaxes.Models
         //-----================--------
         public List<BaseImposable> Nature_Base_Imposable()
         {
-            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             DataTable dtt = cnx.Data_Source("select nature from nature_base_imposable", "nature_base_imposable");
             List<BaseImposable> lstNatActivite = new List<BaseImposable>();
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -180,7 +180,7 @@ namespace ImpotsTaxes.Models
         //---------------
         public List<BaseImposable> Taxes()
         {
-            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             DataTable dtt = cnx.Data_Source("select * from tax", "tax");
             List<BaseImposable> lstTaxe = new List<BaseImposable>();
             for (int i = 0; i < dtt.Rows.Count; i++)
@@ -202,7 +202,7 @@ namespace ImpotsTaxes.Models
         //ENREGISTREMENT IMPOSITION FEUILLE
         public void EnregistrementImpositionFeuille(BaseImposable bas)
         {
-            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("bin\\connexion.xml"));
+            DBConnection cnx = new DBConnection(System.Web.HttpContext.Current.Server.MapPath("~\\bin\\connexion.xml"));
             cnx.Execute_Query("Insert into Imposition_Feuille "+
                 "(nature, "+
                 "id, "+
